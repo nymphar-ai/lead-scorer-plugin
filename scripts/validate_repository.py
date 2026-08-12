@@ -60,6 +60,21 @@ def main() -> int:
     if codex_source != expected_source or claude_source != expected_source:
         errors.append(f"both marketplaces must reference {expected_source}")
 
+    expected_repository = "https://github.com/nymphar-ai/lead-scorer-plugin"
+    repository_values = {
+        payloads["codex_manifest"].get("repository"),
+        payloads["claude_manifest"].get("repository"),
+        payloads["claude_marketplace"]["plugins"][0].get("repository"),
+    }
+    if repository_values != {expected_repository}:
+        errors.append(f"all published metadata must reference {expected_repository}")
+
+    interface = payloads["codex_manifest"].get("interface", {})
+    for field in ("logo", "composerIcon"):
+        asset_path = interface.get(field)
+        if asset_path != "./assets/logo.png" or not (PLUGIN / "assets" / "logo.png").is_file():
+            errors.append(f"Codex interface.{field} must reference ./assets/logo.png")
+
     mcp = payloads["mcp"].get("mcpServers", {}).get("lead-scorer", {})
     if mcp.get("type") != "http" or mcp.get("url") != "https://mcp.lead-scorer.com/mcp":
         errors.append("the plugin must use the production Lead Scorer Streamable HTTP MCP")

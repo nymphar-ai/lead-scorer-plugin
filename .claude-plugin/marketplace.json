@@ -1,16 +1,29 @@
 {
+    "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
     "name": "lead-scorer",
-    "description": "Lead Scorer remote MCP and reviewed outreach Skills for Claude Code",
+    "description": "Lead Scorer remote MCP and reviewed outreach skills for Claude Code",
     "owner": {
         "name": "Lead Scorer",
-        "email": "support@lead-scorer.com"
+        "email": "support@lead-scorer.com",
+        "url": "https://lead-scorer.com"
     },
     "plugins": [
         {
             "name": "lead-scorer-outreach",
+            "source": "./plugins/lead-scorer-outreach",
+            "displayName": "Lead Scorer Outreach",
             "description": "Lead Scorer OAuth MCP and reviewed outreach skills for Claude Code",
-            "version": "1.0.0",
-            "source": "./plugins/lead-scorer-outreach"
+            "version": "1.0.1",
+            "author": {
+                "name": "Lead Scorer",
+                "url": "https://lead-scorer.com"
+            },
+            "homepage": "https://lead-scorer.com/mcp-server",
+            "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
+            "license": "UNLICENSED",
+            "keywords": ["outreach", "sales", "crm", "mcp"],
+            "category": "Productivity",
+            "tags": ["outreach", "sales", "crm", "mcp", "lead-generation"]
         }
     ]
 }

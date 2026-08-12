@@ -1,6 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lead-scorer-outreach",
-  "version": "1.0.0",
+  "displayName": "Lead Scorer Outreach",
+  "version": "1.0.1",
   "description": "Lead Scorer OAuth MCP and reviewed outreach skills for Claude Code",
   "author": {
     "name": "Lead Scorer",

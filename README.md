@@ -74,6 +74,8 @@ plugins/lead-scorer-outreach/
   .codex-plugin/plugin.json               Codex manifest
   .claude-plugin/plugin.json              Claude manifest
   .mcp.json                               Hosted MCP configuration
+  assets/                                 Marketplace branding
+  SUBMISSION.md                           Anthropic submission dossier
   skills/                                 24 reviewed Lead Scorer Skills
 ```
 
@@ -87,7 +89,8 @@ Before opening a pull request, run:
 
 ```bash
 python scripts/validate_repository.py
-claude plugin validate .
+claude plugin validate plugins/lead-scorer-outreach --strict
+claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
 ## Links
