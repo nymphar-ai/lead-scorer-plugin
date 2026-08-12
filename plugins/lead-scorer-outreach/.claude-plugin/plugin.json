@@ -1,0 +1,13 @@
+{
+  "name": "lead-scorer-outreach",
+  "version": "1.0.0",
+  "description": "Lead Scorer OAuth MCP and reviewed outreach skills for Claude Code",
+  "author": {
+    "name": "Lead Scorer",
+    "url": "https://lead-scorer.com"
+  },
+  "homepage": "https://lead-scorer.com/mcp-server",
+  "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
+  "license": "UNLICENSED",
+  "keywords": ["outreach", "sales", "crm", "mcp"]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "lead-scorer-outreach",
+  "version": "1.0.0",
+  "description": "Create a Lead Scorer account, connect the OAuth MCP, manage Pro and credits, and run reviewed outreach workflows from Codex or ChatGPT.",
+  "author": {
+    "name": "Lead Scorer",
+    "url": "https://lead-scorer.com"
+  },
+  "homepage": "https://lead-scorer.com/mcp-server",
+  "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
+  "license": "UNLICENSED",
+  "keywords": ["outreach", "sales", "crm", "mcp", "lead-generation"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Lead Scorer Outreach",
+    "shortDescription": "Find, score and draft outreach with Lead Scorer.",
+    "longDescription": "Connects Lead Scorer's OAuth MCP and installs its outreach playbooks. Account status, Pro, top-ups and channel setup can be handled in the agent; external messages always require human approval.",
+    "developerName": "Lead Scorer",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://lead-scorer.com",
+    "privacyPolicyURL": "https://lead-scorer.com/privacy",
+    "termsOfServiceURL": "https://lead-scorer.com/terms",
+    "brandColor": "#6D5EF7",
+    "defaultPrompt": [
+      "Help me set up a reviewed outbound campaign with Lead Scorer.",
+      "Check my Lead Scorer account status and tell me the next onboarding step."
+    ]
+  }
+}

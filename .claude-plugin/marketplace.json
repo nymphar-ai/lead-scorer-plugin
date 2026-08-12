@@ -1,0 +1,16 @@
+{
+    "name": "lead-scorer",
+    "description": "Lead Scorer remote MCP and reviewed outreach Skills for Claude Code",
+    "owner": {
+        "name": "Lead Scorer",
+        "email": "support@lead-scorer.com"
+    },
+    "plugins": [
+        {
+            "name": "lead-scorer-outreach",
+            "description": "Lead Scorer OAuth MCP and reviewed outreach skills for Claude Code",
+            "version": "1.0.0",
+            "source": "./plugins/lead-scorer-outreach"
+        }
+    ]
+}

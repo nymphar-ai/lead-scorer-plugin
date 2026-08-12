@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "lead-scorer": {
+      "type": "http",
+      "url": "https://mcp.lead-scorer.com/mcp",
+      "oauth": {
+        "scopes": "leads:read"
+      }
+    }
+  }
+}
