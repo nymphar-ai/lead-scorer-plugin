@@ -1,6 +1,6 @@
 {
   "name": "lead-scorer-outreach",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create a Lead Scorer account, connect the OAuth MCP, manage Pro and credits, and run reviewed outreach workflows from Codex or ChatGPT.",
   "author": {
     "name": "Lead Scorer",
@@ -23,6 +23,8 @@
     "privacyPolicyURL": "https://lead-scorer.com/privacy",
     "termsOfServiceURL": "https://lead-scorer.com/terms",
     "brandColor": "#6D5EF7",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png",
     "defaultPrompt": [
       "Help me set up a reviewed outbound campaign with Lead Scorer.",
       "Check my Lead Scorer account status and tell me the next onboarding step."
