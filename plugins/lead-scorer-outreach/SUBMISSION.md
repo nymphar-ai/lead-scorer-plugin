@@ -25,7 +25,7 @@ hosted Lead Scorer MCP over OAuth.
 | :---- | :---- |
 | Plugin name | `lead-scorer-outreach` |
 | Display name | Lead Scorer Outreach |
-| Version | 1.0.1 |
+| Version | 1.0.2 |
 | Category | Productivity |
 | Author | Lead Scorer |
 | Author URL | <https://lead-scorer.com> |
@@ -65,7 +65,7 @@ hosted Lead Scorer MCP over OAuth.
 - Claude and Codex manifests declare the same semantic version.
 - The marketplace source resolves to `./plugins/lead-scorer-outreach`.
 - The bundle contains 24 reviewed skills and one remote Streamable HTTP MCP.
-- OAuth scope is pinned to `leads:read`.
+- OAuth scopes are pinned to `leads:read offline_access`.
 - The plugin contains no hooks, bundled executables, or credentials.
 - `assets/logo.png` and `assets/logo.svg` contain the marketplace branding.
 
