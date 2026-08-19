@@ -4,7 +4,7 @@
       "type": "http",
       "url": "https://mcp.lead-scorer.com/mcp",
       "oauth": {
-        "scopes": "leads:read"
+        "scopes": "leads:read offline_access"
       }
     }
   }

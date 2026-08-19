@@ -78,6 +78,9 @@ def main() -> int:
     mcp = payloads["mcp"].get("mcpServers", {}).get("lead-scorer", {})
     if mcp.get("type") != "http" or mcp.get("url") != "https://mcp.lead-scorer.com/mcp":
         errors.append("the plugin must use the production Lead Scorer Streamable HTTP MCP")
+    oauth = mcp.get("oauth", {})
+    if oauth.get("scopes") != "leads:read offline_access":
+        errors.append("the plugin must request leads:read and offline_access OAuth scopes")
 
     skill_files = sorted((PLUGIN / "skills").glob("*/SKILL.md"))
     if len(skill_files) != 24:
