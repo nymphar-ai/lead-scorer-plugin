@@ -10,6 +10,8 @@ outreach Skills generated from the public Lead Scorer Skills catalog.
   plugin.
 - Payments always use a hosted Stripe page. Outreach never sends without an
   explicit human approval.
+- Email campaigns inherit the signature configured on their sender account;
+  campaign preflight blocks automatic appending when no effective signature exists.
 
 After installation, ask: `Check my Lead Scorer onboarding status and help me
 set up reviewed outreach.`

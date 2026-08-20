@@ -9,9 +9,9 @@ description: >-
 
 # ICP scoring rubric
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
-> **Context first.** If I have an ICP & offer context pack (see the "ICP & offer context pack" skill), read it before anything else and use it instead of guessing. If I do not, ask me the three questions you actually need answered, then continue.
+> **Context first.** Call `get_my_memory`, then `compile_context_pack` when a lead or campaign is in scope. Treat personal memory as user-owned context, not verified public CRM data. If my memory is empty, ask me the three questions you actually need answered, then continue.
 
 ## Goal
 Define a scoring rubric I can defend, calibrate it against leads I already have an opinion on, then apply it to the backlog.

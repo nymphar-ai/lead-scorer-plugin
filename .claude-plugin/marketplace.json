@@ -13,7 +13,7 @@
             "source": "./plugins/lead-scorer-outreach",
             "displayName": "Lead Scorer Outreach",
             "description": "Lead Scorer OAuth MCP and reviewed outreach skills for Claude Code",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "author": {
                 "name": "Lead Scorer",
                 "url": "https://lead-scorer.com"

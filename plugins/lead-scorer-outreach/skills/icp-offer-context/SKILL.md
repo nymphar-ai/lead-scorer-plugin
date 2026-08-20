@@ -9,7 +9,7 @@ description: >-
 
 # ICP & offer context pack
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Produce ONE context block that every other skill reads before it sources, scores or writes anything. Without it, each agent re-invents my positioning slightly differently and the outreach drifts.
@@ -26,10 +26,12 @@ Produce ONE context block that every other skill reads before it sources, scores
    - What proof can I show — named customer, measured result, public case? What can I NOT claim publicly?
    - How do I talk: tu/vous, formal, first-person, jargon tolerated or not?
 3. **Write the pack** with exactly these sections: Offer · ICP · Buying triggers · Disqualifiers · Proof points (each with source) · Forbidden claims · Voice rules.
-4. **Store it.** `create_product` with the offer and value proposition so the agents and the in-app SDR work from the same definition. Keep the full pack as text for me to paste at the top of the other skills.
-5. **Report.** The pack, plus the three answers you found weakest — those are what will break the outreach later.
+4. **Store it in the right layers.** Read `get_my_memory`, merge the full pack into my canonical personal Markdown with `update_my_memory`, preserving useful existing sections and the returned revision. Use `create_product` for the product-specific offer and value proposition. Personal identity, voice, relationships and durable preferences belong in memory; product facts belong on the product.
+5. **Verify reuse.** Call `compile_context_pack` for a representative operation. Check that the personal memory and product overlay remain distinguishable and that no private relationship claim was inferred from public profile data.
+6. **Report.** The pack, the stored memory revision, plus the three answers you found weakest — those are what will break the outreach later.
 
 ## Hard rules
 - Disqualifiers are mandatory output. A skill without them fabricates fit.
 - A proof point I cannot name publicly is not a proof point. Move it to Forbidden claims.
+- Never overwrite the whole personal memory from stale context: read the latest revision immediately before updating it.
 - Do not soften my words into marketing copy. This pack is internal, and specificity is the whole value.

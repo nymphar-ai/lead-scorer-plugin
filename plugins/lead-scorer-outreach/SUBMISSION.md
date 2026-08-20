@@ -25,7 +25,7 @@ hosted Lead Scorer MCP over OAuth.
 | :---- | :---- |
 | Plugin name | `lead-scorer-outreach` |
 | Display name | Lead Scorer Outreach |
-| Version | 1.0.2 |
+| Version | 1.0.3 |
 | Category | Productivity |
 | Author | Lead Scorer |
 | Author URL | <https://lead-scorer.com> |
