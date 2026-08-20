@@ -9,6 +9,7 @@ One installation provides:
 - 24 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
 - agent-native account onboarding, Pro subscription and credit top-ups;
 - secure hosted email and LinkedIn connection flows;
+- account-level sender signatures inherited by campaigns, with preflight protection;
 - human approval boundaries before payment, connection, credit use or sending.
 
 The repository contains no API key, OAuth token, Stripe Price ID, card data or

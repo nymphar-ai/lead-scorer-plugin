@@ -9,7 +9,7 @@ description: >-
 
 # Cold email first touch
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 > **Context first.** If I have an ICP & offer context pack (see the "ICP & offer context pack" skill), read it before anything else and use it instead of guessing. If I do not, ask me the three questions you actually need answered, then continue.
 
@@ -22,8 +22,8 @@ Write the first email for every lead in campaign <CAMPAIGN_ID> so that it could 
 - Ask: <the single low-friction next step>
 
 ## Steps
-1. **Preflight.** `list_sender_accounts` — stop if no healthy sender is connected.
-2. **Load context.** `get_campaign_authoring_context` returns each lead's enrichment, summary, insights and signal dossier. Use it; do not re-research what is already there.
+1. **Preflight.** `list_sender_accounts` — stop if no healthy sender is connected. For email, also stop when `signature_configured` is false: ask me for the exact signature, then persist it once with `update_sender_account`. Never invent sender identity.
+2. **Load context.** Resolve the campaign with `list_campaigns` when its ID is unknown, then call `get_campaign_authoring_context`; it returns each lead's enrichment, summary, insights and signal dossier. Use it; do not re-research what is already there.
 3. **Write, lead by lead**, to this shape:
    - **Subject**: 2-4 words, lowercase, no punctuation tricks, no first name, no emoji. It should look like a note from a colleague.
    - **Opener** (1 sentence): about their world — the signal, dated and specific.

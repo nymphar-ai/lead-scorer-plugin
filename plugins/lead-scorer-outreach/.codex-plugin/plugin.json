@@ -1,6 +1,6 @@
 {
   "name": "lead-scorer-outreach",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Create a Lead Scorer account, connect the OAuth MCP, manage Pro and credits, and run reviewed outreach workflows from Codex or ChatGPT.",
   "author": {
     "name": "Lead Scorer",

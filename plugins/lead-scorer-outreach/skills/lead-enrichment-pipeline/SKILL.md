@@ -9,7 +9,7 @@ description: >-
 
 # Lead enrichment pipeline
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Take list <LIST_ID> from raw to campaign-ready: enriched profiles, found emails, and an AI summary per lead.
@@ -29,13 +29,14 @@ Both paid calls accept `dry_run: true`, which returns the estimate and your bala
 
 ## Steps
 1. **Inventory.** `get_leads_from_list` — count who has a LinkedIn URL, an email, an enriched profile.
-2. **Estimate, then enrich the pre-qualified only.** `enrich_leads` with `dry_run: true` on the shortlist to see the cost, then run it for real. Lead by lead (small batches; a big batch that half-fails is harder to retry). Enrichment REQUIRES the lead to have a linkedin_url — skip and report those without one. Use `enrich_company` for companies with a LinkedIn but no data.
+2. **Estimate, then enrich the pre-qualified only.** Call `enrich_leads` once with `dry_run: true` and the complete shortlist, then call it once for real with the same `lead_ids`. The backend persists one resumable run and batches provider work safely; one tool call per lead creates a burst of competing runs and must never be used. Enrichment REQUIRES the lead to have a linkedin_url — skip and report those without one. Use `enrich_company` for companies with a LinkedIn but no data.
 3. **Contact finding.** Hand this to the "Contact discovery" skill: it only runs on leads confirmed as ICP that you intend to contact. An email found for someone nobody will write to is 3 credits burned — a miss is free, a useless hit is not.
 4. **AI layer.** `get_leads_pending_ai_enrichment`, then for each: write a 3-4 line summary and 2-3 actionable insights (angle to open with, risk, timing) from the enriched data, and store them with `submit_lead_ai_enrichment`.
 5. **Reconcile.** Enrichment data is the source of truth: if it contradicts what web research said (role changed, company pivoted), update your notes and say so.
 6. **Report.** Enriched / emails found / AI-summarized / skipped (and why).
 
 ## Hard rules
-- One lead at a time on enrichment writes; never fire-and-forget a 500-lead batch.
+- One shortlist per `enrich_leads` call, up to 1,000 leads. Never loop or parallelize one call per lead.
+- Keep the returned run ID and poll it with `get_lead_enrichment_run`; use `list_lead_enrichment_runs` to recover progress after a restarted session.
 - Nothing paid runs on a lead that has not been scored first.
 - No outreach here. This skill ends when the list is ready.

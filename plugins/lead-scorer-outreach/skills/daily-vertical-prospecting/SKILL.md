@@ -9,7 +9,7 @@ description: >-
 
 # Daily vertical prospecting
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Each run covers ONE new vertical (a niche, industry segment, or country) for my product and turns it into a clean list of companies + decision-makers in Lead Scorer.
@@ -22,10 +22,10 @@ Each run covers ONE new vertical (a niche, industry segment, or country) for my 
 ## Steps
 1. **Check coverage.** Call `get_lead_lists` and look at my existing list names and tags. Never redo a vertical that already has a list; announce which vertical you picked and why.
 2. **Source companies (web research).** Find 15-30 real companies in the vertical that match the ICP. Only companies you can verify exist (site, LinkedIn, registry). No directories, no dead brands.
-3. **Source people.** For each company, identify 1-2 decision-makers matching the buyer role. Real names with a verifiable LinkedIn profile only. NEVER guess a LinkedIn handle — if you cannot verify it, store the lead without one.
+3. **Source people.** For each company, identify 1-2 decision-makers matching the buyer role. Real names with a verifiable LinkedIn profile only. NEVER guess a LinkedIn handle — if you cannot verify it, skip the lead honestly.
 4. **Write to Lead Scorer.**
    - `create_list` named "<VERTICAL> — <today's date>".
-   - `create_company` for each company (it dedups by LinkedIn username), then `create_lead` for each person, `add_leads_to_list`.
+   - `create_company` for each company (it dedups by LinkedIn username), then `create_lead` for each person with that list ID in `list_ids`. Creation, deduplication and list membership are atomic.
    - Tag every lead with the vertical name via `add_tags_to_lead` — tags are the coverage ledger.
 5. **Report.** Companies found / created / already existing, leads created, and which vertical to do tomorrow.
 
