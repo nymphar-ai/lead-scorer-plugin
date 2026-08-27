@@ -83,8 +83,8 @@ def main() -> int:
         errors.append("the plugin must request leads:read and offline_access OAuth scopes")
 
     skill_files = sorted((PLUGIN / "skills").glob("*/SKILL.md"))
-    if len(skill_files) != 24:
-        errors.append(f"expected 24 Skills, found {len(skill_files)}")
+    if len(skill_files) != 25:
+        errors.append(f"expected 25 Skills, found {len(skill_files)}")
     for path in skill_files:
         content = path.read_text(encoding="utf-8")
         match = re.match(r"^---\n(.*?)\n---\n", content, re.DOTALL)
