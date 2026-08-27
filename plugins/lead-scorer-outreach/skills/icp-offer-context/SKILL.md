@@ -15,7 +15,7 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint ht
 Produce ONE context block that every other skill reads before it sources, scores or writes anything. Without it, each agent re-invents my positioning slightly differently and the outreach drifts.
 
 ## Steps
-1. **Look at reality before asking me.** `list_products` (what I already sell, as the CRM knows it), `get_lead_lists` and `list_tags` (who I have actually been targeting). Show me the gap between what I say I sell and who is in the CRM.
+1. **Look at reality before asking me.** `get_my_workspace_context` (dated identity evidence, sender identities, products, ICP/scoring and campaign briefs), `list_products` (what I already sell, as the CRM knows it), `get_lead_lists` and `list_tags` (who I have actually been targeting). Treat imported LinkedIn fields as observations, not current truth, and show me the contradictions before asking.
 2. **Interview me.** Ask these, one at a time, and push back on vague answers:
    - What do I sell, in one sentence a customer would recognize?
    - Which problem does the buyer already know they have? (If they do not know it, outreach is education, and that is a different motion.)

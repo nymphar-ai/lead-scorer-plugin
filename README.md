@@ -6,7 +6,8 @@ The official public plugin for connecting Codex, ChatGPT and Claude Code to
 One installation provides:
 
 - the hosted OAuth MCP at `https://mcp.lead-scorer.com/mcp`;
-- 24 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
+- 25 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
+- source-backed company website summaries and product/ICP-specific AI analysis;
 - agent-native account onboarding, Pro subscription and credit top-ups;
 - secure hosted email and LinkedIn connection flows;
 - account-level sender signatures inherited by campaigns, with preflight protection;
@@ -77,7 +78,7 @@ plugins/lead-scorer-outreach/
   .mcp.json                               Hosted MCP configuration
   assets/                                 Marketplace branding
   SUBMISSION.md                           Anthropic submission dossier
-  skills/                                 24 reviewed Lead Scorer Skills
+  skills/                                 25 reviewed Lead Scorer Skills
 ```
 
 ## Updating

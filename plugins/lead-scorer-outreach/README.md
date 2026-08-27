@@ -29,6 +29,11 @@ The MCP entry is a remote Streamable HTTP server at
 `https://mcp.lead-scorer.com/mcp`. It carries no credential: the host runs the
 OAuth 2.0 flow in the browser on first use and stores the token itself.
 
+The enrichment workflow can discover companies awaiting research and submit a
+source-backed website summary plus a separate AI analysis tied to the selected
+product and ICP. These writes are free and remain stored in Lead Scorer's
+central company context for later campaign drafting.
+
 ## Claude Code
 
 Add the public marketplace and install the plugin:
@@ -68,7 +73,7 @@ codex plugin add lead-scorer-outreach@lead-scorer
 ```
 
 Approve `Lead Scorer Outreach`, authenticate in the browser, then start a new
-conversation so the host loads the MCP and all 24 Skills.
+conversation so the host loads the MCP and all 25 Skills.
 
 ## Fallback without the plugin
 
