@@ -81,11 +81,37 @@ plugins/lead-scorer-outreach/
   skills/                                 25 reviewed Lead Scorer Skills
 ```
 
+## Hiring workflows
+
+When the connected MCP exposes the hiring tools, the prospecting and signal
+research Skills use this sequence:
+
+1. Read `list_hiring_taxonomy` and follow pagination to discover canonical roles,
+   skills and seniorities. Reuse existing identifiers and aliases.
+2. Use `ensure_hiring_term` only for a missing generic term. Case variants such as
+   Python/python resolve to one canonical value.
+3. Save verified vacancies with `upsert_company_hiring_signal`, supplying
+   `normalized.roles`, `normalized.skills` and `normalized.seniorities` as arrays
+   of `{slug, evidence}`. Keep source URLs and observation dates; quote saved facts
+   verbatim. Unknown identifiers or missing evidence are rejected.
+4. Search `search_hiring_companies` using the same values and verify saved records
+   with `get_company_signals`. All criteria must match the same vacancy.
+
+These operations do not send messages or activate campaigns. The hosted MCP must
+expose the required tools before this plugin version is released.
+
 ## Updating
 
 Plugin releases use semantic versions in both manifests and in the Claude
 marketplace entry. The MCP remains hosted by Lead Scorer, so server-side tool
 fixes do not require republishing credentials or changing user configuration.
+
+Endpoint changes must also update the application documentation at
+[the signed-in MCP page](https://lead-scorer.com/mcp) and
+[the public MCP page](https://lead-scorer.com/mcp-server), their generated catalog,
+and the affected canonical Skills in the Lead Scorer application repository.
+Preserve newer plugin-only Skills when synchronizing generated content. Keep a
+plugin PR in draft while its required hosted endpoints are not deployed.
 
 Before opening a pull request, run:
 
