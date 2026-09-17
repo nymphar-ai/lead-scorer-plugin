@@ -4,7 +4,8 @@ description: >-
   Find verified emails and phone numbers, but only for leads already confirmed as ICP and
   about to be contacted — the most expensive call in the platform, spent last and on
   purpose. Use when the user mentions trouver les emails, contact discovery, find emails,
-  enrichir les contacts, FullEnrich, or asks why a run consumed so many credits.
+  enrichir les contacts, FullEnrich, vérifier les emails existants, verify existing CRM
+  emails, or asks why a run consumed so many credits.
 ---
 
 # Contact discovery (spend last)
@@ -15,6 +16,9 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint ht
 
 ## Goal
 Find contact details for list <LIST_ID> — and only for the leads that survived scoring and enrichment and are going into a campaign now.
+
+## Existing email verification
+If the request is to verify an email already saved in the CRM, use `verify_lead_emails`, not contact discovery. Discover IDs with `get_lead_lists` and `get_leads_from_list`, then read `get_lead`. Call `verify_lead_emails` with `lead_id` and `dry_run: true` first: it checks account/contact access, visible emails and provider configuration without spending or calling the provider. Live provider availability is not guaranteed by an estimate. Execution costs **1 credit per successful lead verification**, regardless of email count. Respect the confirmation threshold; use `confirm: true` only after approval. It verifies only emails accessible to the authenticated account, never another account's private contacts. Failures are refunded; report missing email access, no visible emails, insufficient credits or provider unavailability explicitly. Read `verification_status`, `verification_provider` and `verified_at` with `get_lead` afterward. Repeating verification is another paid operation; reading results is free. Do not trigger FullEnrich for this request.
 
 ## Why this one runs last
 `find_lead_contact_info` is the most expensive call in the platform: **3 credits per email FOUND, 15 per phone number found**. A lead the provider cannot resolve costs nothing; an address served from our cache counts as found and is charged normally. Scoring is free, enrichment is about 1 credit a lead. So the order is not a style preference, it is where the money goes.
