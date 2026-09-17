@@ -22,9 +22,14 @@ Create a DRAFT campaign for list <LIST_ID> where every lead gets a message writt
 ## Steps
 1. **Senders.** `list_sender_accounts` — confirm which account will send; stop if none is connected. For email, stop when `signature_configured` is false, ask me for the exact signature, then save it once with `update_sender_account`. Never invent sender identity.
 2. **Create.** `create_campaign` (draft) + `add_leads_to_campaign` for the list. If an existing draft has no sender yet, attach it with `update_campaign_senders`. If it needs one more touch, append it with `add_campaign_step`; never rebuild or overwrite the reviewed steps.
+   To remove an enrolled lead, discover it with `list_campaign_leads`, explain that its campaign drafts, actions and replies will be removed while the CRM record remains, and obtain separate explicit approval before `remove_lead_from_campaign` with confirm=true. Use the returned lead_id, never the enrollment id. Removing CRM access with `remove_lead_access` also removes the lead from the user's campaigns.
+
 3. **Author, lead by lead.** Call `get_campaign_authoring_context` — it returns each lead's enrichment, summary and insights. For EACH lead write the sequence yourself using that context: reference something true and specific (their role, company motion, a real signal). Push with `write_campaign_drafts`.
 4. **Self-review.** `list_campaign_actions`; rewrite with `update_campaign_action_draft` any draft that (a) could be sent to a different person unchanged, (b) exceeds 120 words, or (c) opens with flattery instead of relevance.
 5. **Handoff.** Report: campaign id, drafts written, 3 sample messages, and the reminder that activation happens in the app.
+
+## Event invitations
+For a daily LinkedIn event campaign, discover the list with `get_lead_lists` and the account with `list_sender_accounts`, then use `create_event_invite_campaign` with the actual event URL, selected IDs, daily_event_invite_limit (1–100) and a stable idempotency_key. It snapshots the audience and creates the review actions without message authoring or credits. Use `update_campaign_sending` to adjust the event quota, days or window. Explain that the account event ceiling includes manual invitations and other campaigns, and missing member IDs or already-invited leads are skipped. Leave activation to the human in the app.
 
 ## Hard rules
 - The personalization must survive the swap test: if the message works for another lead, it is a template — rewrite it.

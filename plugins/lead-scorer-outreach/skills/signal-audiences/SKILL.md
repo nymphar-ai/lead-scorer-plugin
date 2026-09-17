@@ -17,7 +17,7 @@ People who engage with relevant LinkedIn content are warm. Capture them as an au
 ## Steps
 1. **Pick the signal.** A post URL of mine that performed, or a competitor/creator profile whose audience matches my ICP (`fetch_profile_posts` to find their top recent post).
 2. **Capture.** `create_audience_source` with the post/profile — it lands engagers in a list. `list_audience_sources` first to avoid duplicating an existing source.
-3. **Sync.** `sync_audience_source` to refresh an existing source instead of recreating it.
+3. **Sync.** `sync_audience_source` resumes an unfinished capture or refreshes an exhausted source. Large post audiences continue automatically in batches, saving reactions and comments separately; poll `list_audience_sources` for status and next_sync_at instead of repeatedly launching syncs.
 4. **Qualify.** `get_leads_from_list` on the audience list; enrich the ICP matches with `enrich_leads` (needs linkedin_url). Flag the top 10 with a one-line "why now" each.
 5. **Report.** New engagers captured, ICP matches, and which ones deserve a campaign.
 
