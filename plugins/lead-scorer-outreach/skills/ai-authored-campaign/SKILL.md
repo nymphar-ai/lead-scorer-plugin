@@ -9,7 +9,7 @@ description: >-
 
 # AI-authored campaign drafts
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for every read and write. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Do not delegate web search to Lead Scorer workflows or call its HTTP endpoints as a fallback: those searches incur server-side provider costs. If native search is unavailable, ask me to enable it or provide sources; do not silently switch to a paid backend search. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Create a DRAFT campaign for list <LIST_ID> where every lead gets a message written for them specifically. I activate in the Lead Scorer app; the agent never sends anything.
