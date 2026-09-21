@@ -33,8 +33,7 @@ an account there before granting MCP access.
 ## Install in Codex
 
 ```bash
-git clone https://github.com/nymphar-ai/lead-scorer-plugin.git
-codex plugin marketplace add ./lead-scorer-plugin
+codex plugin marketplace add nymphar-ai/lead-scorer-plugin --ref main
 codex plugin add lead-scorer-outreach@lead-scorer
 ```
 
@@ -87,10 +86,68 @@ Plugin releases use semantic versions in both manifests and in the Claude
 marketplace entry. The MCP remains hosted by Lead Scorer, so server-side tool
 fixes do not require republishing credentials or changing user configuration.
 
+Every change under `plugins/lead-scorer-outreach/skills/` requires a version
+increase in all three version fields, including changes to supporting files.
+CI compares pull requests with their base commit and main pushes with their
+previous commit. It rejects skill changes without a strictly newer version.
+Publishing a Git tag alone does not update clients following `main`; merge the
+skills and version bump into `main` together.
+
+### Codex clients
+
+Register the GitHub marketplace using the installation command above so Codex
+can fetch new releases. The `source: local` entry inside our marketplace remains
+correct: it points to the plugin within the fetched repository.
+
+Existing users who registered a local clone should migrate once:
+
+```bash
+codex plugin marketplace remove lead-scorer
+codex plugin marketplace add nymphar-ai/lead-scorer-plugin --ref main
+codex plugin add lead-scorer-outreach@lead-scorer
+```
+
+Refresh the Git marketplace explicitly when needed:
+
+```bash
+codex plugin marketplace upgrade lead-scorer
+```
+
+Start a new task after updating; restart the desktop app if it still shows the
+old skills. A remote registration makes releases fetchable, but does not promise
+an automatic refresh schedule across all Codex clients.
+
+For managed ChatGPT/Codex workspaces, administrators can import the GitHub
+marketplace through workspace settings. OpenAI documents daily synchronization
+and a **Sync now** control. See [OpenAI marketplace synchronization](https://help.openai.com/en/articles/20001256/).
+
+### Claude Code clients
+
+Third-party marketplaces default to auto-update disabled. Each user should open
+`/plugin`, select **Marketplaces**, select **lead-scorer**, and choose
+**Enable auto-update**. Organization administrators can instead set
+`autoUpdate: true` on the marketplace's `extraKnownMarketplaces` entry in managed
+settings. This is a client setting, not a field in our plugin manifest.
+
+Claude updates the installed plugin in the background after startup. Run
+`/reload-plugins` when prompted, or start a new session to load the updated skills.
+For a manual update:
+
+```bash
+claude plugin marketplace update lead-scorer
+claude plugin update lead-scorer-outreach@lead-scorer
+```
+
+See [Claude Code auto-update settings](https://code.claude.com/docs/en/discover-plugins#configure-auto-updates).
+
+### Release checks
+
 Before opening a pull request, run:
 
 ```bash
 python scripts/validate_repository.py
+python scripts/validate_skill_release.py --base origin/main
+python -m unittest discover -s scripts -p 'test_*.py'
 claude plugin validate plugins/lead-scorer-outreach --strict
 claude plugin validate .claude-plugin/marketplace.json --strict
 ```
