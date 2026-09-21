@@ -9,7 +9,7 @@ description: >-
 
 # Signal audiences — engagers to pipeline
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Do not delegate web search to Lead Scorer workflows or call its HTTP endpoints as a fallback: those searches incur server-side provider costs. If native search is unavailable, ask me to enable it or provide sources; do not silently switch to a paid backend search. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 People who engage with relevant LinkedIn content are warm. Capture them as an audience, enrich them, and keep the source fresh.

@@ -11,7 +11,7 @@ description: >-
 
 # Freelance talent sourcing
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Do not delegate web search to Lead Scorer workflows or call its HTTP endpoints as a fallback: those searches incur server-side provider costs. If native search is unavailable, ask me to enable it or provide sources; do not silently switch to a paid backend search. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Build a recruiter-ready pool for <ROLE> from <SOURCES>, aiming for <TARGET COUNT> real people. Keep one Lead Scorer lead list per source, plus structured profile facts that remain searchable across every list.
@@ -27,8 +27,8 @@ Build a recruiter-ready pool for <ROLE> from <SOURCES>, aiming for <TARGET COUNT
 2. **Prepare lists.** Read `get_lead_lists`. Create or reuse one lead list per source: "Freelance <ROLE> — Web", "— Collective", "— Malt" and "— Free-Work". Do not create a duplicate list on refresh.
 3. **Search deliberately.** Capture only named people with a stable public identity or profile URL. Record the exact source URL and observation date. Prefer explicit technical detail over generic titles. Do not claim availability, a date, a TJM, work mode, location preference or years of experience unless the page states it.
 4. **Deduplicate before writing.** Match verified LinkedIn URL first, then exact platform profile URL, then name plus location/headline. Use `get_lead` or `get_freelance_profile` to review uncertain matches. Report uncertain pairs instead of merging them.
-5. **Create the CRM identity.** Call `create_lead` with the verified LinkedIn URL when present, otherwise a public email, or the real full name plus the available profile facts. Include the source list ID in `list_ids`; for an existing accessible lead, use `add_leads_to_list`.
-6. **Save the structured profile.** Call `upsert_freelance_profile` with:
+5. **Resolve the CRM identity.** When LinkedIn or a public email is available, call `create_lead` and pass its `lead_id` to `upsert_freelance_profile`. When the platform profile is the only stable identity, call `upsert_freelance_profile` with `identity` instead: real full name, visible profile facts and the source list ID. The exact source URL creates or reuses the CRM lead atomically; never invent a company merely to create the contact. For an existing accessible lead, use `add_leads_to_list`.
+6. **Save the structured profile.** Call `upsert_freelance_profile` with either `lead_id` or `identity`, plus:
    - every source's provider, public profile URL and `observed_at`;
    - normalized roles, atomic technical skills and seniority, each with a verbatim evidence excerpt;
    - explicit availability status/date and its visible label;
