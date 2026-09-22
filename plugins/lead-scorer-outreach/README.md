@@ -67,8 +67,7 @@ claude plugin uninstall lead-scorer-outreach
 ## Codex and ChatGPT Desktop
 
 ```bash
-git clone https://github.com/nymphar-ai/lead-scorer-plugin.git
-codex plugin marketplace add ./lead-scorer-plugin
+codex plugin marketplace add nymphar-ai/lead-scorer-plugin --ref main
 codex plugin add lead-scorer-outreach@lead-scorer
 ```
 
@@ -87,6 +86,17 @@ claude mcp add --transport http --scope user lead-scorer https://mcp.lead-scorer
 Codex users can add the same Streamable HTTP URL as `lead_scorer` and run
 `codex mcp login lead_scorer`. OAuth signup remains the only account-creation
 flow; the plugin never contains a credential.
+
+## Receiving skill updates
+
+Use a Git-backed marketplace registration so releases can be fetched. Existing
+local-clone installations need a one-time migration. Claude Code users must
+enable auto-update for the Lead Scorer marketplace; Codex users can refresh with
+`codex plugin marketplace upgrade lead-scorer`. Managed OpenAI workspaces support
+daily GitHub marketplace synchronization.
+
+See the [update guide](../../README.md#updating) for migration commands, client
+settings, reload instructions, and release checks.
 
 ## Maintaining and publishing
 
