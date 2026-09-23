@@ -3,7 +3,7 @@ name: campaign-performance-review
 description: >-
   Read a campaign's numbers, name the single broken link (list, subject line,
   personalization or ask), and fix the drafts still queued. Use when the user mentions
-  campaign results, open rate, reply rate, bounce rate, performance, a post-mortem, or
+  campaign results, click rate, open rate, reply rate, bounce rate, performance, a post-mortem, or
   asks why a campaign is not working.
 ---
 
@@ -15,8 +15,8 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint ht
 Turn campaign <CAMPAIGN_ID>'s numbers into one named cause and one applied fix. "Improve the copy" is not a diagnosis.
 
 ## Steps
-1. **Pull the state.** Resolve the campaign with `list_campaigns` when needed, then call `get_campaign` and `list_campaign_actions` — sent, opened, replied, bounced, still queued, per touch. `get_leads_from_list` for the underlying list quality.
-2. **Walk the ladder in order and stop at the first broken rung.** Fixing a later rung while an earlier one is broken wastes the campaign:
+1. **Pull the state.** Resolve the campaign with `list_campaigns` when needed, then call `get_campaign` and `list_campaign_actions` — sent, clicked, replied, bounced, still queued, per touch. Read `analytics.clicks` and each `analytics.steps[].clicks`: `total` counts unique email actions with a qualified click, `tracked` counts sent emails containing tracked links, and `rate` is `total / tracked` (null with no tracked emails). Actions expose `clicked_at` (first accepted click) and `click_tracking_enabled`. Count an action once across repeated links and visits. These fields require the NYM-1511 deployment; if absent, report click tracking as unavailable. Historical sends and emails without rewritten links cannot be backfilled; null `clicked_at` on an untracked action is unknown engagement, not zero interest. Only future sends with `tracking.clicks` enabled can add tracked links. Immediate clicks, known scanner user agents and prefetch requests are filtered heuristically; remaining clicks do not prove human intent. `get_leads_from_list` for the underlying list quality.
+2. **Walk the ladder in order and stop at the first broken rung.** Never infer an open rate from a click, or treat a configured open-tracking flag as collected data. Skip diagnostics requiring metrics the tools do not provide. Qualified clicks with few replies can justify inspecting the destination page or call to action, but do not establish why recipients abandoned it. Fixing a later rung while an earlier one is broken wastes the campaign:
    - **Bounces > 2%** → list quality. Stop; go back to sourcing and enrichment.
    - **Open rate < 25%** with clean delivery → subject lines, or placement. Test subjects before touching the body.
    - **Reply rate < 3%** with healthy opens → the message. Almost always the personalization level, not the wording: check whether drafts used level 1-2 signals or fell back to segment truths.
