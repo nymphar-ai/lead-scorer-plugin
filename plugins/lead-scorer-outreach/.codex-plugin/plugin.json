@@ -1,6 +1,6 @@
 {
   "name": "lead-scorer-outreach",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Connect the Lead Scorer OAuth MCP to source structured freelance talent pools and run reviewed outreach workflows from Codex or ChatGPT.",
   "author": {
     "name": "Lead Scorer",
