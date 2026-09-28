@@ -6,7 +6,7 @@ The official public plugin for connecting Codex, ChatGPT and Claude Code to
 One installation provides:
 
 - the hosted OAuth MCP at `https://mcp.lead-scorer.com/mcp`;
-- 25 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
+- 28 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
 - source-backed company website summaries and product/ICP-specific AI analysis;
 - agent-native account onboarding, Pro subscription and credit top-ups;
 - secure hosted email and LinkedIn connection flows;
@@ -158,3 +158,7 @@ claude plugin validate .claude-plugin/marketplace.json --strict
 - [Skills library](https://lead-scorer.com/skills)
 - [Privacy policy](https://lead-scorer.com/privacy)
 - [Terms of service](https://lead-scorer.com/terms)
+
+## Verified hiring research
+
+The three source-hiring-companies skills cover web/ATS, Free-Work and Collective. They discover workflow availability before calling it and retain a native-research fallback. Hiring-company workflows require the NYM-1530 backend and MCP release; do not assume a local draft is deployed.
