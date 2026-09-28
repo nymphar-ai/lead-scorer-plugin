@@ -4,7 +4,7 @@ description: >-
   Capture the people who engaged with a LinkedIn post or profile into a deduplicated Lead
   Scorer list, then enrich and qualify them. Use when the user mentions LinkedIn engagers,
   likers, reactors, commenters, post engagement, warm audiences, audience capture, or
-  wants leads out of a post that performed.
+  wants leads out of a post that performed, or wants to see which events a prospect registered for.
 ---
 
 # Signal audiences — engagers to pipeline
@@ -20,6 +20,11 @@ People who engage with relevant LinkedIn content are warm. Capture them as an au
 3. **Sync.** `sync_audience_source` resumes an unfinished capture or refreshes an exhausted source. Large post audiences continue automatically in batches, saving reactions and comments separately; poll `list_audience_sources` for status and next_sync_at instead of repeatedly launching syncs.
 4. **Qualify.** `get_leads_from_list` on the audience list; enrich the ICP matches with `enrich_leads` (needs linkedin_url). Flag the top 10 with a one-line "why now" each.
 5. **Report.** New engagers captured, ICP matches, and which ones deserve a campaign.
+
+## Event registrations in the CRM
+- For an event, use its LinkedIn participants people-search URL with one `eventAttending` filter, including events organized by others. Reuse the existing audience source; importing it retains the import's normal credits and LinkedIn read budget.
+- After discovering the lead through your lists, read `get_lead`. If `event_registrations` is available, report its `items` with the event links, source names and observation dates. Read further pages with `event_offset` until the `total` observations have been covered. If the field is absent on an older deployment, report this history as unavailable.
+- This is saved registration evidence, not proof of attendance, current registration or acceptance of our particular invitation. List membership alone is not registration evidence. Never silently launch an import or campaign refresh just to answer a CRM read.
 
 ## Hard rules
 - Engagement is a signal, not consent: qualification before any outreach decision.
