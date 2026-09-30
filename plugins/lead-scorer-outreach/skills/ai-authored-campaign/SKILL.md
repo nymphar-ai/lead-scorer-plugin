@@ -29,7 +29,7 @@ Create a DRAFT campaign for list <LIST_ID> where every lead gets a message writt
 5. **Handoff.** Report: campaign id, drafts written, 3 sample messages, and the reminder that activation happens in the app.
 
 ## Event invitations
-For a daily LinkedIn event campaign, discover the list with `get_lead_lists` and the account with `list_sender_accounts`, then use `create_event_invite_campaign` with the actual event URL, selected IDs, daily_event_invite_limit (1–100) and a stable idempotency_key. It snapshots the audience and creates the review actions without message authoring or credits. Use `update_campaign_sending` to adjust the event quota, days or window. Explain that the account event ceiling includes manual invitations and other campaigns, and missing member IDs or already-invited leads are skipped. Leave activation to the human in the app.
+For a daily LinkedIn event campaign, discover the list with `get_lead_lists` and the account with `list_sender_accounts`, then use `create_event_invite_campaign` with the actual event URL, selected IDs, daily_event_invite_limit (1–100) and a stable idempotency_key. It snapshots the audience and creates the review actions without message authoring or credits. Use `update_campaign_sending` to adjust the event quota, days or window. Explain that the account event ceiling includes manual invitations and other campaigns, and already-invited leads are skipped. Inspect get_campaign and list_campaign_actions for unresolved LinkedIn identities or provider errors; approval alone does not repair an identity failure. Leave activation to the human in the app.
 
 ## Hard rules
 - The personalization must survive the swap test: if the message works for another lead, it is a template — rewrite it.
