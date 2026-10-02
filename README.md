@@ -152,6 +152,15 @@ claude plugin validate plugins/lead-scorer-outreach --strict
 claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
+## OpenAI directory release
+
+The public OpenAI directory uses a separate submission ZIP built from these same
+25 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
+[the OpenAI submission guide](submission/OPENAI.md). Its MCP endpoint is
+`https://mcp.lead-scorer.com/mcp/openai`; it uses existing account entitlements
+and excludes digital-service purchases. Git marketplace installation alone does
+not constitute publication in the OpenAI directory.
+
 ## Links
 
 - [MCP documentation](https://lead-scorer.com/mcp-server)

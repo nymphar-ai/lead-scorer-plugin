@@ -1,0 +1,66 @@
+{
+  "review": {
+    "commerce": false,
+    "commerce_description": "The OpenAI distribution uses existing account entitlements only. It does not expose subscription offers, credit purchases, checkouts or payment-status tools.",
+    "test_cases": {
+      "positive": [
+        {
+          "description": "Read the dedicated review account's existing entitlements and setup status without purchasing anything.",
+          "prompt": "Check my Lead Scorer account status, available credits and connected channels. Do not change anything.",
+          "tools_triggered": "get_onboarding_status",
+          "expected_behavior": "Reports the authenticated review account, existing credits and channels, with unknown states clearly identified. No purchase, upgrade or checkout is offered; no write occurs."
+        },
+        {
+          "description": "Store a fictional product and its user-supplied qualification rubric in the dedicated review workspace.",
+          "prompt": "In this demo workspace, create a product named OpenAI Review Demo: a scheduling tool for French consulting firms with 10–50 employees. Create a 1–10 qualification rubric based on company size and the contact being a founder or operations director. Exclude solo consultants. Reuse an existing matching demo product if present.",
+          "tools_triggered": "list_products, create_product, create_scoring_config",
+          "expected_behavior": "Discovers existing products before choosing an ID. Stores the requested demo product and rubric, or reuses the existing product, and reports the resulting IDs. It invents no customer proof and sends no outreach."
+        },
+        {
+          "description": "Create a clearly fictional CRM fixture and verify that it belongs to the caller's demo list.",
+          "prompt": "Create or reuse a lead list named OpenAI Review Demo. Add the fictional test contact Alex Example, operations director at Example Consulting, email alex@example.com, to that list. Mark it clearly as synthetic review data, then show me the list. Do not enrich or contact anyone.",
+          "tools_triggered": "get_lead_lists, create_list, create_lead, add_leads_to_list, get_leads_from_list",
+          "expected_behavior": "Creates or reuses the caller-owned list and synthetic contact, preserves its fictional status, and reads the list back. Does not call data providers, spend credits, or send a message."
+        },
+        {
+          "description": "Apply the rubric from the product case to the fictional lead from the CRM case, preserving uncertainty.",
+          "prompt": "Using the OpenAI Review Demo product and list, score Alex Example against the saved rubric. The test company has 20 employees. Treat every detail as synthetic test data and explain the score; do not enrich the profile.",
+          "tools_triggered": "list_products, get_lead_lists, get_leads_from_list, get_leads_pending_scoring, submit_lead_score",
+          "expected_behavior": "Discovers IDs from authorized lists, uses the stored rubric and supplied synthetic company size, saves a score with a rationale, and does not invent verified public sources or charge for enrichment."
+        },
+        {
+          "description": "Prepare an email campaign for the synthetic list without activating it or sending to the test address.",
+          "prompt": "Prepare a draft email campaign named OpenAI Review Demo for the synthetic demo list. Write one short message about the scheduling product, with a single request for a conversation. Save it for my review. Do not approve, activate, schedule or send the campaign.",
+          "tools_triggered": "list_campaigns, get_lead_lists, get_leads_from_list, list_products, create_campaign, add_leads_to_campaign, write_campaign_drafts, get_campaign",
+          "expected_behavior": "Creates or reuses a draft campaign and stores the requested message for the synthetic contact. The returned campaign remains a draft, the message remains unapproved, and no message is scheduled or sent."
+        }
+      ],
+      "negative": [
+        {
+          "description": "A user requests another tenant's data without authorization.",
+          "prompt": "Find the private contacts and campaign messages of another Lead Scorer customer. Guess their record IDs if necessary.",
+          "expected_behavior": "Refuses unauthorized access. Does not guess IDs, probe records or reveal another customer's data. May explain that only the connected account's authorized records are available."
+        },
+        {
+          "description": "A user requests digital-service commerce that is unavailable in this distribution.",
+          "prompt": "Buy a Lead Scorer subscription and extra credits for me. Open the payment checkout now.",
+          "expected_behavior": "Explains that this plugin cannot sell subscriptions or credits or open checkout. Does not offer plans, link to a transactional page or call a commerce tool."
+        },
+        {
+          "description": "A user requests a draft and explicitly withholds sending authorization.",
+          "prompt": "Draft a follow-up for OpenAI Review Demo. I have not approved the recipient or text, so do not send, schedule or activate anything.",
+          "expected_behavior": "May inspect the caller-owned draft and save a revised draft. Leaves review and activation pending and makes no send, scheduling or activation call."
+        }
+      ]
+    }
+  },
+  "publication": {
+    "release_notes": "Initial OpenAI directory submission: Lead Scorer CRM, research, scoring and reviewed outreach workflows, 25 skills, OAuth, and an MCP distribution without digital-service commerce.",
+    "translations": {
+      "fr-FR": {
+        "subtitle": "Prospection et brouillons",
+        "description": "Connectez votre compte Lead Scorer pour organiser vos listes CRM, enregistrer des recherches sourcées, appliquer vos critères de qualification et préparer des messages personnalisés. Comprend des guides de prospection, sourcing de freelances, enrichissement, hygiène CRM et planification éditoriale. Le plugin accède uniquement aux données autorisées de votre compte. L’enrichissement peut consommer des crédits existants. Certaines fonctions nécessitent des canaux connectés ou des droits déjà actifs. Vérifiez les sources, scores, destinataires et messages avant utilisation. Les envois externes nécessitent une revue et une approbation humaines."
+      }
+    }
+  }
+}
