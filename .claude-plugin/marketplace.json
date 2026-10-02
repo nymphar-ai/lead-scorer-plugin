@@ -13,7 +13,7 @@
             "source": "./plugins/lead-scorer-outreach",
             "displayName": "Lead Scorer Outreach",
             "description": "Lead Scorer OAuth MCP, freelance talent sourcing, and reviewed outreach skills for Claude Code",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "author": {
                 "name": "Lead Scorer",
                 "url": "https://lead-scorer.com"
@@ -21,9 +21,24 @@
             "homepage": "https://lead-scorer.com/mcp-server",
             "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
             "license": "UNLICENSED",
-            "keywords": ["outreach", "sales", "crm", "mcp", "recruiting", "freelance"],
+            "keywords": [
+                "outreach",
+                "sales",
+                "crm",
+                "mcp",
+                "recruiting",
+                "freelance"
+            ],
             "category": "Productivity",
-            "tags": ["outreach", "sales", "crm", "mcp", "lead-generation", "recruiting", "freelance"]
+            "tags": [
+                "outreach",
+                "sales",
+                "crm",
+                "mcp",
+                "lead-generation",
+                "recruiting",
+                "freelance"
+            ]
         }
     ]
 }
