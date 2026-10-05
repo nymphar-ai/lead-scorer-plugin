@@ -167,3 +167,5 @@ not constitute publication in the OpenAI directory.
 - [Skills library](https://lead-scorer.com/skills)
 - [Privacy policy](https://lead-scorer.com/privacy)
 - [Terms of service](https://lead-scorer.com/terms)
+
+Audience quota and queue guidance requires the audience-budget backend and MCP release. The signal-audiences skill discovers tool availability before relying on the new controls.
