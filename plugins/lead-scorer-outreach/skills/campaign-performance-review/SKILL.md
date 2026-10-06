@@ -27,6 +27,9 @@ Turn campaign <CAMPAIGN_ID>'s numbers into one named cause and one applied fix. 
    - **Mostly "not now"** → timing and trigger choice, not copy. Change which signal you source on.
 3. **Compare the top and bottom deciles.** Read the 5 best-performing messages and the 5 worst. What is structurally different? Name it in one sentence.
 4. **Apply the fix to what has not gone out yet** with `update_campaign_action_draft`. A teardown that only produces advice changes nothing.
+   - If the user wants to stop a particular queued message, discover its `action_id` with `list_campaign_actions`, show its body and send date, then call `cancel_campaign_action` with `confirm: true` only after explicit confirmation. This preserves the prospect and sent history.
+   - If the user wants to remove an entire follow-up step, discover its `step_id` with `get_campaign`, call `preview_campaign_step_deletion`, and show the waiting-action count, dated-action count and date range. After explicit confirmation, call `delete_campaign_step` with `confirm: true`. Its waiting actions are cancelled and successors reconnect; sent actions, campaign statistics and enrolled leads remain. A sending or unknown outcome must finish or be verified before removing its step.
+   - Use these operations only when the connected server exposes them. If unavailable, report the limitation; do not remove enrolled leads or extend delays as a substitute for cancellation.
 5. **Tag the outcome** on the leads (`add_tags_to_lead`) so segments stay honest across campaigns.
 6. **Report.** Metric table, the one named cause, what you changed, and the single thing to do differently on the next campaign.
 
