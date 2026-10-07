@@ -29,10 +29,8 @@ The failure mode is well documented: a run that finds emails for a whole list be
 
 An email found for a lead nobody writes to is not an asset. It is 3 credits, gone.
 
-## Email cache eligibility
-By default, email discovery reuses stored addresses only when at least one email is explicitly classified as `work`. Leads with only `personal` or `generic` emails are searched, including imported business addresses that have not been classified as work. Domain names alone do not determine classification. This selection rule applies to the app, MCP, onboarding and internal workflows.
-
-Use `refresh: true` only to force a new lookup despite an existing work email or phone. It does not bypass access rules. The provider may return only a personal email; that remains a successful billable result. Cached work emails are also billed normally. Poll the returned `run_id` with `get_contact_enrichment_run`; do not resubmit while a lookup is pending.
+## Reading email results
+Email discovery may reuse an existing professional address. Use `refresh: true` only when you intentionally need a new lookup. Results can include personal addresses; both returned and reused contacts are charged at the usual rate. Poll the returned `run_id` with `get_contact_enrichment_run` instead of submitting the shortlist again.
 
 ## Steps
 1. **Confirm the shortlist.** `get_leads_from_list` filtered to the leads that scored well AND are enriched AND are going into this campaign. If you cannot name the campaign, stop — you are not ready to spend.
