@@ -17,19 +17,19 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated 
 Define a scoring rubric I can defend, calibrate it against leads I already have an opinion on, then apply it to the backlog.
 
 ## This is free, and it runs first
-You do the judging; the platform only stores the result. Reading leads and writing scores costs **zero credits** — `get_leads_from_list`, `get_lead`, `get_leads_pending_scoring` and `submit_lead_score` are all free, however many leads you run them on.
+You do the judging; the platform only stores the result. Reading leads and writing scores costs **zero credits**: `get_leads_from_list`, `get_lead`, `get_leads_pending_scoring` and `submit_lead_score` are all free, however many leads you run them on.
 
-That is what makes this the first step of every list. Enrichment and contact discovery are the paid calls, and they should only ever touch what scored well here. Score the whole list, then spend on the top of it — never the reverse.
+That is what makes this the first step of every list. Enrichment and contact discovery are the paid calls, and they should only ever touch what scored well here. Score the whole list, then spend on the top of it, never the reverse.
 
 Score from what is already on the lead: headline, role, company name and whatever the source captured. Do not enrich to score; that inverts the order and is exactly how a run ends up spending 8 credits per usable contact instead of 1.
 
 ## Steps
 1. **Draft the rubric.** 4-6 criteria max, each weighted, each observable from data the CRM actually holds (company size, sector, role seniority, buying trigger, tech/market signal). A criterion nobody can observe is a wish, not a criterion.
 2. **Set the bands.** What does 9-10 mean, 7-8, 4-6, 1-3? Write one concrete example company per band.
-3. **Calibrate before you scale.** Take 10 leads I already have a view on (`get_leads_from_list`, `get_lead`), score them by the rubric, and show me the table. Where your score and my gut disagree, the rubric is wrong — fix the weights, not my opinion.
+3. **Calibrate before you scale.** Take 10 leads I already have a view on (`get_leads_from_list`, `get_lead`), score them by the rubric, and show me the table. Where your score and my gut disagree, the rubric is wrong: fix the weights, not my opinion.
 4. **Persist.** `create_scoring_config` with the criteria and weights so runs stay comparable over time.
 5. **Apply.** `get_leads_pending_scoring`, then `submit_lead_score` per lead with a 2-line `score_explanation` naming the criteria that drove the number. Never "strong fit for our solution".
-6. **Report.** Score distribution, the 5 highest with why, and any criterion that never discriminated (every lead scored the same on it — cut it).
+6. **Report.** Score distribution, the 5 highest with why, and any criterion that never discriminated (every lead scored the same on it: cut it).
 
 ## Hard rules
 - A score without an explanation tied to a named criterion is noise. Never submit one.
