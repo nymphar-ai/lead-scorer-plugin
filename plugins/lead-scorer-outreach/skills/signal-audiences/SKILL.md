@@ -17,9 +17,14 @@ People who engage with relevant LinkedIn content are warm. Capture them as an au
 ## Steps
 1. **Pick the signal.** A post URL of mine that performed, or a competitor/creator profile whose audience matches my ICP (`fetch_profile_posts` to find their top recent post).
 2. **Capture.** `create_audience_source` with the post/profile — it lands engagers in a list. `list_audience_sources` first to avoid duplicating an existing source.
-3. **Sync.** `sync_audience_source` resumes an unfinished capture or refreshes an exhausted source. Large post audiences continue automatically in batches, saving reactions and comments separately; poll `list_audience_sources` for status and next_sync_at instead of repeatedly launching syncs.
+3. **Sync.** Only on the user’s explicit request, `sync_audience_source` authorizes another people-search batch from the saved cursor or refreshes an exhausted source. Large post audiences continue automatically in batches, saving reactions and comments separately; poll `list_audience_sources` for status and next_sync_at instead of repeatedly launching syncs.
 4. **Qualify.** `get_leads_from_list` on the audience list; enrich the ICP matches with `enrich_leads` (needs linkedin_url). Flag the top 10 with a one-line "why now" each.
 5. **Report.** New engagers captured, ICP matches, and which ones deserve a campaign.
+
+## People-search read control
+- When the deployed tool exposes `max_profiles`, use a bounded scan: default 100, from 10 to 1,000 in multiples of 10. Read `estimate_audience` first and report its separate preview reads, capture upper bound, optional degree-read upper bound and remaining shared daily allowance. Scanned duplicates also consume reads.
+- The authorized batch shares `scan_limit` and `profiles_scanned` across automatic quota continuations and worker restarts. At `limit_reached`, capture stops and `continuation_available` indicates saved progress. Do not repeatedly sync to bypass the cap or consume the whole daily allowance.
+- `update_audience_source` changes the next batch’s `max_profiles` without starting work or enlarging the current allowance. Only after the user asks to capture more, call `sync_audience_source` to renew the configured batch at the saved cursor. Ordinary pause/resume preserves the existing allowance. Never silently raise the scan cap. On older deployments without these fields, report the limitation before starting a broad search.
 
 ## Event registrations in the CRM
 - For an event, use its LinkedIn participants people-search URL with one `eventAttending` filter, including events organized by others. Reuse the existing audience source; importing it retains the import's normal credits and LinkedIn read budget.
