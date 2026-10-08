@@ -17,15 +17,15 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated 
 I paste a reply (or point you at a lead). You pull the context, classify it, and draft my answer. You never send.
 
 ## Steps
-1. **Context.** `get_lead` for the person; resolve an unknown campaign with `list_campaigns`, then use `get_campaign` + `list_campaign_actions` for what we actually sent them and when. Read our own message before answering theirs — half of bad replies come from forgetting what we said.
+1. **Context.** `get_lead` for the person; resolve an unknown campaign with `list_campaigns`, then use `get_campaign` + `list_campaign_actions` for what we actually sent them and when. Read our own message before answering theirs: half of bad replies come from forgetting what we said.
 2. **Read and classify.** Use `list_inbox_conversations` to find the channel, campaign and account, then `get_inbox_conversation` to read the full history. Use `list_inbox_replies` for reply qualifications and sequence state. A courtesy-only reply (`no_positioning`) differs from `neutral` (unclear): never treat an invitation to talk, a phone number, a confidential exchange or a meeting proposal as a courtesy. `qualify_inbox_reply` records the user's assessment and keeps the sequence paused. Resume with `resume_inbox_sequence` only when the user explicitly requests that prospect's sequence to continue; resuming an active campaign permits its already-approved steps to send. Their remaining delay freezes during the reply pause; it is restored without removing any pre-existing lateness. A later reply pauses again. Never resume a refusal or DNC.
    Classify into one bucket:
-   - **Interested** — wants to talk or asks a real question
-   - **Timing** — relevant but not now ("Q1", "after the migration")
-   - **Wrong person** — redirect offered or implied
-   - **Objection** — price, incumbent, built in-house, no budget
-   - **No** — explicit refusal or unsubscribe
-   - **Auto** — out of office, bounce, no-reply noise
+   - **Interested**: wants to talk or asks a real question
+   - **Timing**: relevant but not now ("Q1", "after the migration")
+   - **Wrong person**: redirect offered or implied
+   - **Objection**: price, incumbent, built in-house, no budget
+   - **No**: explicit refusal or unsubscribe
+   - **Auto**: out of office, bounce, no-reply noise
 3. **Draft the response** by bucket:
    - Interested → confirm one concrete next step, propose two time slots, no re-pitch.
    - Timing → accept the timing without arguing, ask for the trigger to watch, propose one dated follow-up.

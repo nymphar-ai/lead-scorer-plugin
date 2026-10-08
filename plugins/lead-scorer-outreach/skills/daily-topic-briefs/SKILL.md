@@ -18,11 +18,11 @@ Produce ONE editorial brief for topic <TOPIC> from today's fresh signals, struct
 1. **Research.** Find 4-6 FRESH signals (last 30 days) on the topic: studies with numbers, named company cases, practitioner verbatims. Web sources only; keep the URL of each.
 2. **Write the brief** with exactly these sections:
    - **TL;DR** (3 lines max)
-   - **Signals** — each: the fact, the number, the source URL
-   - **Interpretation** — the operator take: what this means for my audience, what everyone gets wrong, the consequence at 12 months
+   - **Signals** (each: the fact, the number, the source URL)
+   - **Interpretation** (the operator take: what this means for my audience, what everyone gets wrong, the consequence at 12 months)
    - **Possible angles** (2-3, each one thesis)
    - **Candidate hooks** (2-3 one-liners, fact-first)
-   - **Raw material** — verbatims and exact figures ready to quote
+   - **Raw material** (verbatims and exact figures ready to quote)
 3. **Store.** `upsert_content_item` with item_type "brief", category "<topic-slug>", external_id "brief:<topic-slug>/<YYYY-MM-DD>" (idempotent: re-running the same day updates, not duplicates).
 4. **Report.** The TL;DR + the strongest angle.
 
