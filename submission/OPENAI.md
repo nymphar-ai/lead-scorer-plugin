@@ -12,7 +12,7 @@ python3 scripts/build_openai_submission.py
 ```
 
 The complete ZIP and SHA-256 are written to `dist/openai/`. The archive contains
-the manifest, one HTTPS MCP endpoint, all 25 skills and the referenced branding.
+the manifest, one HTTPS MCP endpoint, all 28 skills and the referenced branding.
 It excludes the Claude manifest, repository configuration and private credentials.
 
 ## Live review preparation

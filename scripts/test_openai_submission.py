@@ -14,7 +14,7 @@ class OpenAiSubmissionTests(unittest.TestCase):
             original = path.read_bytes()
             with zipfile.ZipFile(path) as archive:
                 names = archive.namelist()
-                self.assertEqual(len([n for n in names if n.endswith("/SKILL.md")]), 25)
+                self.assertEqual(len([n for n in names if n.endswith("/SKILL.md")]), 28)
                 self.assertNotIn(".claude-plugin/plugin.json", names)
                 self.assertNotIn("SUBMISSION.md", names)
                 mcp = json.loads(archive.read(".mcp.json"))

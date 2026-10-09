@@ -6,7 +6,7 @@ The official public plugin for connecting Codex, ChatGPT and Claude Code to
 One installation provides:
 
 - the hosted OAuth MCP at `https://mcp.lead-scorer.com/mcp`;
-- 25 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
+- 28 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
 - source-backed company website summaries and product/ICP-specific AI analysis;
 - agent-native account onboarding, Pro subscription and credit top-ups;
 - secure hosted email and LinkedIn connection flows;
@@ -77,7 +77,7 @@ plugins/lead-scorer-outreach/
   .mcp.json                               Hosted MCP configuration
   assets/                                 Marketplace branding
   SUBMISSION.md                           Anthropic submission dossier
-  skills/                                 25 reviewed Lead Scorer Skills
+  skills/                                 28 reviewed Lead Scorer Skills
 ```
 
 ## Updating
@@ -155,7 +155,7 @@ claude plugin validate .claude-plugin/marketplace.json --strict
 ## OpenAI directory release
 
 The public OpenAI directory uses a separate submission ZIP built from these same
-25 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
+28 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
 [the OpenAI submission guide](submission/OPENAI.md). Its MCP endpoint is
 `https://mcp.lead-scorer.com/mcp/openai`; it uses existing account entitlements
 and excludes digital-service purchases. Git marketplace installation alone does
@@ -169,3 +169,7 @@ not constitute publication in the OpenAI directory.
 - [Terms of service](https://lead-scorer.com/terms)
 
 Audience budget/queue controls, bounded scans and connection degrees require their matching backend/MCP releases; the skill checks availability before use.
+
+## Verified hiring research
+
+Hiring skills cover web/ATS, Free-Work and Collective. Confirm criteria/budget and CRM access first. Native research with CRM saves is supported; `source_hiring_companies` is app-only unless explicitly advertised for MCP execution. The NYM-1530 implementation must be reviewed before release.
