@@ -168,4 +168,4 @@ not constitute publication in the OpenAI directory.
 - [Privacy policy](https://lead-scorer.com/privacy)
 - [Terms of service](https://lead-scorer.com/terms)
 
-Audience quota and queue guidance requires the audience-budget backend and MCP release. The signal-audiences skill discovers tool availability before relying on the new controls.
+Audience budget/queue controls, bounded scans and connection degrees require their matching backend/MCP releases; the skill checks availability before use.
