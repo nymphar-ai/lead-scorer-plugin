@@ -1,7 +1,7 @@
 ---
 name: campaign-performance-review
 description: >-
-  Diagnose campaign results and fix queued drafts in Lead Scorer. Use for open/reply/bounce
+  Diagnose campaign results and fix queued drafts in Lead Scorer. Use for open/click/reply/bounce
   rates, underperforming campaigns, post-mortems, cancelling queued messages or removing
   follow-up steps.
 ---
@@ -13,8 +13,8 @@ Use the authenticated `lead-scorer` MCP for CRM work; native search/browsing for
 For cancellation requests, go directly to the cancellation section. For performance reviews, identify one cause and apply one fix.
 
 ## Review performance
-1. Resolve the campaign with `list_campaigns`, then read `get_campaign` and `list_campaign_actions`: sent, opened, replied, bounced and queued, per touch. Check list quality with `get_leads_from_list`. For `event_invite` steps, use the event metrics below instead of the cold-email ladder.
-2. Stop at the first broken rung:
+1. Resolve the campaign with `list_campaigns`, then read `get_campaign` and `list_campaign_actions`: sent, clicked, replied, bounced and queued, per touch. Apply the email-click rules below. Check list quality with `get_leads_from_list`. For `event_invite` steps, use the event metrics below instead of the cold-email ladder.
+2. Skip diagnostics with unavailable metrics. Clicks and enabled open-tracking flags do not establish measured opens. Stop at the first broken rung:
    - Bounces > 2%: list quality; stop and revisit sourcing/enrichment.
    - Opens < 25% with clean delivery: subject lines or placement; test subjects before the body.
    - Replies < 3% with healthy opens: personalization; check level 1–2 signals versus generic segment truths.
@@ -25,6 +25,13 @@ For cancellation requests, go directly to the cancellation section. For performa
 5. Tag outcomes with `add_tags_to_lead`. Report the metric table, cause, applied change and one adjustment for the next campaign.
 
 Below ~50 sends, report insufficient data instead of inventing a trend. Keep one cause per teardown and change only one variable between campaigns.
+
+## Email click metrics
+- Read `analytics.clicks` and `analytics.steps[].clicks`: `total` counts unique clicked email actions; `tracked` counts sent emails with tracked links; `rate = total / tracked`, null when `tracked = 0`. Missing fields mean unavailable.
+- `clicked_at` is the first accepted click; `click_tracking_enabled` shows link coverage. Count each action once across repeated links/visits. Null timestamps on untracked/historical emails mean unknown engagement, not zero interest.
+- Only future sends with `tracking.clicks` enabled get rewritten links; no historical/untracked backfill.
+- Immediate clicks, known scanner user agents and prefetches are filtered heuristically. Remaining clicks do not prove human intent.
+- Clicks with few replies warrant inspecting the destination page/CTA, not asserting abandonment causes.
 
 ## Cancel queued messages or steps
 Check tool availability first. If unavailable, report the limitation; never remove enrolled leads or extend delays as a cancellation workaround.
