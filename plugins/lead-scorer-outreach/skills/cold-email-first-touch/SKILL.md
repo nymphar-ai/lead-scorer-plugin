@@ -18,15 +18,15 @@ Write the first email for every lead in campaign <CAMPAIGN_ID> so that it could 
 
 ## My inputs (edit these)
 - Offer: <what I propose, and the ONE problem it solves>
-- Proof: <a named customer, a measured result, or "none yet — say so honestly">
+- Proof: <a named customer, a measured result, or "none yet, say so honestly">
 - Ask: <the single low-friction next step>
 
 ## Steps
-1. **Preflight.** `list_sender_accounts` — stop if no healthy sender is connected. For email, also stop when `signature_configured` is false: ask me for the exact signature, then persist it once with `update_sender_account`. Never invent sender identity.
+1. **Preflight.** `list_sender_accounts`: stop if no healthy sender is connected. For email, also stop when `signature_configured` is false: ask me for the exact signature, then persist it once with `update_sender_account`. Never invent sender identity.
 2. **Load context.** Resolve the campaign with `list_campaigns` when its ID is unknown, then call `get_campaign_authoring_context`; it returns each lead's enrichment, summary, insights and signal dossier. Use it; do not re-research what is already there.
 3. **Write, lead by lead**, to this shape:
    - **Subject**: 2-4 words, lowercase, no punctuation tricks, no first name, no emoji. It should look like a note from a colleague.
-   - **Opener** (1 sentence): about their world — the signal, dated and specific.
+   - **Opener** (1 sentence): about their world: the signal, dated and specific.
    - **Relevance** (1-2 sentences): why that signal makes my offer worth 20 seconds of their time.
    - **Proof** (1 sentence): a real number or a named customer. If I have none, drop this line rather than inflate one.
    - **Ask** (1 sentence): one question, low friction. Not a 30-minute demo in email one.
@@ -38,7 +38,7 @@ Write the first email for every lead in campaign <CAMPAIGN_ID> so that it could 
    - Exactly one ask, phrased as a question
    - Would survive the swap test: paste it under another lead's name and it should stop making sense
    - No jargon, no "quick question", no fake Re:/Fwd:
-6. **Report.** Drafts written, 3 samples, and any lead you refused to write for (no verified signal) — those should be removed from the campaign, not templated.
+6. **Report.** Drafts written, 3 samples, and any lead you refused to write for (no verified signal). Those should be removed from the campaign, not templated.
 
 ## Voice calibration by seniority
 - Founder / C-level: 3-5 sentences. They read the first line and decide.

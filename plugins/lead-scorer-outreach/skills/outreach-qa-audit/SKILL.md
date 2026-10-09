@@ -12,7 +12,7 @@ description: >-
 You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated with Lead Scorer OAuth at the endpoint configured by the installed plugin). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
-Nothing in campaign <CAMPAIGN_ID> reaches me for approval until it has been scored and, if needed, rewritten. Grading your own drafts is not optional — it is the step that separates outreach from spam.
+Nothing in campaign <CAMPAIGN_ID> reaches me for approval until it has been scored and, if needed, rewritten. Grading your own drafts is not optional: it is the step that separates outreach from spam.
 
 ## The rubric (100 points)
 | Axis | Points | What earns them |
@@ -25,10 +25,10 @@ Nothing in campaign <CAMPAIGN_ID> reaches me for approval until it has been scor
 | Voice | 10 | No corporate speak, no AI tells, sounds like one person writing to another |
 
 ## Steps
-1. Resolve the campaign with `list_campaigns` when needed, then call `get_campaign` and `list_campaign_actions` — pull every draft.
-2. `get_campaign_authoring_context` — you need the source signals to judge whether the personalization is real or hallucinated. **A message that references a signal not present in the context scores 0 on Honesty and is flagged, not fixed silently.**
+1. Resolve the campaign with `list_campaigns` when needed, then call `get_campaign` and `list_campaign_actions` to pull every draft.
+2. `get_campaign_authoring_context`: you need the source signals to judge whether the personalization is real or hallucinated. **A message that references a signal not present in the context scores 0 on Honesty and is flagged, not fixed silently.**
 3. Score every draft, axis by axis. Show the table.
-4. **Rewrite everything under 70** with `update_campaign_action_draft`, then re-score. Two rewrites maximum — a third failure means the lead lacks a real signal, so flag it for removal instead.
+4. **Rewrite everything under 70** with `update_campaign_action_draft`, then re-score. Two rewrites maximum: a third failure means the lead lacks a real signal, so flag it for removal instead.
 5. **Campaign verdict:**
    - Median ≥ 80 and no honesty flags → ready for my approval
    - Median 70-79 → ship, but name the weakest axis so the next campaign fixes it upstream

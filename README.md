@@ -167,3 +167,5 @@ not constitute publication in the OpenAI directory.
 - [Skills library](https://lead-scorer.com/skills)
 - [Privacy policy](https://lead-scorer.com/privacy)
 - [Terms of service](https://lead-scorer.com/terms)
+
+Audience budget/queue controls, bounded scans and connection degrees require their matching backend/MCP releases; the skill checks availability before use.

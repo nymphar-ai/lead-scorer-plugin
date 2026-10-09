@@ -20,21 +20,21 @@ Extend campaign <CAMPAIGN_ID> into a sequence where each follow-up would work as
 | Touch | Day | Angle |
 | --- | --- | --- |
 | 1 | 1 | The signal-based first touch |
-| 2 | 4 | New evidence — a case, a number, a resource they can use without replying |
+| 2 | 4 | New evidence: a case, a number, a resource they can use without replying |
 | 3 | 9 | A different pain the same buyer owns |
 | 4 | 16 | An industry insight or a pattern I see across their segment |
 | 5 | 25 | One direct question, three lines maximum |
 | 6 | 35 | Breakup |
 
 ## Steps
-1. Resolve the campaign with `list_campaigns` when its ID is unknown, then call `get_campaign` + `get_campaign_authoring_context` — read the first touch already written for each lead. Follow-ups must not repeat its argument. Append each missing touch in order with `add_campaign_step`, using a stable idempotency key per campaign + target day and `condition=if_no_reply`; never recreate the campaign or overwrite an existing step.
+1. Resolve the campaign with `list_campaigns` when its ID is unknown, then call `get_campaign` + `get_campaign_authoring_context` and read the first touch already written for each lead. Follow-ups must not repeat its argument. Append each missing touch in order with `add_campaign_step`, using a stable idempotency key per campaign + target day and `condition=if_no_reply`; never recreate the campaign or overwrite an existing step.
 2. **Assign an angle per touch before writing.** If you cannot name the angle in four words, do not write the email.
 3. **Write each follow-up standalone**: it must make sense to someone who never opened email one. Never open with "following up on my previous email" or "circling back".
 4. Reload `get_campaign_authoring_context`, then push the returned new `step_order` drafts with `write_campaign_drafts`; review with `list_campaign_actions` and fix with `update_campaign_action_draft`.
 5. **The breakup (touch 6)** does three things: closes the loop without guilt, leaves the door open, and asks for a redirect ("if someone else owns this, a name would help"). Keep it under 60 words.
-6. **Exit rules — state them explicitly in the report:** stop on any reply, on an unsubscribe, on a bounce, or when touch 6 is sent. Never restart a lead who said no.
+6. **Exit rules (state them explicitly in the report):** stop on any reply, on an unsubscribe, on a bounce, or when touch 6 is sent. Never restart a lead who said no.
 
 ## Hard rules
 - Each follow-up shorter than the one before. Touch 5 is three lines.
-- "Just checking in", "bumping this to the top of your inbox", "did you see my last email" — these are not follow-ups, they are noise. Never write them.
+- "Just checking in", "bumping this to the top of your inbox", "did you see my last email": these are not follow-ups, they are noise. Never write them.
 - Draft only. Activation and sending happen in the app, by me.
