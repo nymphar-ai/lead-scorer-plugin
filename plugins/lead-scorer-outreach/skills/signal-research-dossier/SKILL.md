@@ -17,21 +17,21 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated 
 Before any campaign on list <LIST_ID>, build a short dossier per lead containing only facts you can point at. Personalization quality is a research problem, not a writing problem.
 
 ## Signal hierarchy (use the highest available, record its level)
-1. **The lead's own words** — a post, comment or talk from the last ~8 weeks (`get_lead_posts`). Strongest; quote it.
-2. **A company event** — funding, hiring wave, launch, new market, leadership change (`get_company_info`, `enrich_leads`, web).
-3. **Role reality** — recent role change, unusual scope, a team they clearly own.
-4. **Segment truth** — something demonstrably true of their exact segment, not of "companies like yours".
+1. **The lead's own words**: a post, comment or talk from the last ~8 weeks (`get_lead_posts`). Strongest; quote it.
+2. **A company event**: funding, hiring wave, launch, new market, leadership change (`get_company_info`, `enrich_leads`, web).
+3. **Role reality**: recent role change, unusual scope, a team they clearly own.
+4. **Segment truth**: something demonstrably true of their exact segment, not of "companies like yours".
 5. **Nothing.** Say so and skip the lead. This is a valid, expected outcome.
 
 ## Steps
 1. `get_leads_from_list` and work lead by lead.
 2. For each: pull `get_lead`, `get_lead_posts`, `get_company_info`; fill gaps with `enrich_leads` (requires linkedin_url) and targeted web research.
-3. Write the dossier: 2-4 signals max, each with **level · the fact · the source URL · a date**. Add one line of "so what for this lead" — the angle the signal unlocks.
+3. Write the dossier: 2-4 signals max, each with **level · the fact · the source URL · a date**. Add one line of "so what for this lead": the angle the signal unlocks.
 4. Write the saved summary and analysis in English, keeping names and source quotations unchanged. Store it with `submit_lead_ai_enrichment` so the campaign-authoring skills read it instead of re-researching. Keep the language of outreach drafts independent.
 5. Read `list_hiring_taxonomy` to select existing global roles, skills and seniorities; paginate until complete. Use `ensure_hiring_term` only for missing generic terms. For a verified vacancy, supply canonical slugs and verbatim evidence in normalized.roles/skills/seniorities and save `upsert_company_hiring_signal` against the actual recruiting company and read it back with `get_company_signals`. The saved vacancy automatically indexes normalized role, skill and seniority tags, searchable with `search_hiring_companies`. Retain published job details, atomic skills in details.skills, and dated sources in the structured details object; unknown criteria stay absent. A relationship note or campaign brief does not create a company signal. Use `set_lead_primary_company` only with a verified career company from `get_lead`; distinguish the current employer from a parent or previous company. Never publish candidate details or private outreach in a shared signal.
-6. **Report** three buckets: ready (≥2 signals, at least one level 1-2), thin (1 signal), skip (nothing verified) — with counts.
+6. **Report** three buckets: ready (≥2 signals, at least one level 1-2), thin (1 signal), skip (nothing verified), with counts.
 
 ## Hard rules
 - A signal needs a source and a date. "They seem focused on growth" is not a signal.
 - Never infer a signal from the company's marketing site copy. That is their claim, not an event.
-- Undated signals older than ~3 months are stale for level 1 — demote them.
+- Undated signals older than ~3 months are stale for level 1: demote them.

@@ -19,12 +19,12 @@ Write the sequence that runs after someone accepts my connection request. The ac
 ## Cadence
 | Touch | When | Job of the message |
 | --- | --- | --- |
-| 1 | Accept + 2 days | Continue the thread the note opened. Give something — an observation, a resource, a question about their situation. No ask. |
+| 1 | Accept + 2 days | Continue the thread the note opened. Give something: an observation, a resource, a question about their situation. No ask. |
 | 2 | + 5 days | A different angle: a pattern I see in their segment, or a concrete result from a comparable company. One low-friction question. |
 | 3 | + 12 days | Close the loop. Name that I will stop, leave the door open, offer the redirect. |
 
 ## Steps
-1. `get_lead` and `get_lead_posts` to recover the signal used in the connection note and check whether anything changed since (new post, new role — that becomes touch 1).
+1. `get_lead` and `get_lead_posts` to recover the signal used in the connection note and check whether anything changed since (new post, new role: that becomes touch 1).
 2. Resolve the campaign with `list_campaigns` when its ID is unknown, then call `get_campaign_authoring_context` for the enrichment and insights; write each touch per lead, never as a template.
 3. Push with `write_campaign_drafts`, review with `list_campaign_actions`, fix with `update_campaign_action_draft`.
 4. **Report** the sequence per lead with the angle of each touch named in four words.
@@ -36,6 +36,6 @@ Write the sequence that runs after someone accepts my connection request. The ac
 - Never open with "Thanks for connecting!" followed by a pitch. That is the single most ignored message on the platform.
 
 ## Hard rules
-- Stop the sequence on any reply — hand it to the reply-triage skill.
+- Stop the sequence on any reply and hand it to the reply-triage skill.
 - Three touches maximum, then the lead exits. Silence after three is an answer.
 - Draft only. I send.
