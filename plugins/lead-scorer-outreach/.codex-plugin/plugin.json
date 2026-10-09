@@ -1,7 +1,7 @@
 {
   "name": "lead-scorer-outreach",
-  "version": "1.0.7",
-  "description": "Connect the Lead Scorer OAuth MCP to source structured freelance talent pools and run reviewed outreach workflows from Codex or ChatGPT.",
+  "version": "1.0.15",
+  "description": "Manage Lead Scorer CRM data, research prospects, score leads, and prepare outreach drafts for human review.",
   "author": {
     "name": "Lead Scorer",
     "url": "https://lead-scorer.com"
@@ -9,16 +9,27 @@
   "homepage": "https://lead-scorer.com/mcp-server",
   "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
   "license": "UNLICENSED",
-  "keywords": ["outreach", "sales", "crm", "mcp", "lead-generation", "recruiting", "freelance"],
+  "keywords": [
+    "outreach",
+    "sales",
+    "crm",
+    "mcp",
+    "lead-generation",
+    "recruiting",
+    "freelance"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Lead Scorer Outreach",
-    "shortDescription": "Find, score and draft outreach with Lead Scorer.",
-    "longDescription": "Connects Lead Scorer's OAuth MCP and installs its recruiting and outreach playbooks. Build source-backed freelance talent pools with normalized skills, rates and availability, then prepare reviewed outreach; external messages always require human approval.",
+    "shortDescription": "Research and draft outreach",
+    "longDescription": "Connect your Lead Scorer account to organize CRM lists, save source-backed research, apply your scoring criteria and prepare personalized outreach drafts. Includes playbooks for prospecting, freelance talent sourcing, enrichment, CRM hygiene and content planning. Uses only data available to your connected account. Enrichment may consume existing Lead Scorer credits, and some features need connected channels or existing account entitlements. Review sources, scores, recipients and message content before use. External messages require human review and approval.",
     "developerName": "Lead Scorer",
     "category": "Productivity",
-    "capabilities": ["Read", "Write"],
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
     "websiteURL": "https://lead-scorer.com",
     "privacyPolicyURL": "https://lead-scorer.com/privacy",
     "termsOfServiceURL": "https://lead-scorer.com/terms",
@@ -29,6 +40,7 @@
       "Help me set up a reviewed outbound campaign with Lead Scorer.",
       "Check my Lead Scorer account status and tell me the next onboarding step.",
       "Build a source-backed pool of freelance Data Engineers with normalized skills and dated availability."
-    ]
+    ],
+    "supportURL": "https://github.com/nymphar-ai/lead-scorer-plugin/issues"
   }
 }

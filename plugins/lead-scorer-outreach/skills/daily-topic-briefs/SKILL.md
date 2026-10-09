@@ -9,7 +9,7 @@ description: >-
 
 # Daily topic brief (veille → editorial brief)
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated with Lead Scorer OAuth at the endpoint configured by the installed plugin). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Produce ONE editorial brief for topic <TOPIC> from today's fresh signals, structured so a writing agent (or I) can turn it into posts without re-researching.
@@ -18,11 +18,11 @@ Produce ONE editorial brief for topic <TOPIC> from today's fresh signals, struct
 1. **Research.** Find 4-6 FRESH signals (last 30 days) on the topic: studies with numbers, named company cases, practitioner verbatims. Web sources only; keep the URL of each.
 2. **Write the brief** with exactly these sections:
    - **TL;DR** (3 lines max)
-   - **Signals** — each: the fact, the number, the source URL
-   - **Interpretation** — the operator take: what this means for my audience, what everyone gets wrong, the consequence at 12 months
+   - **Signals** (each: the fact, the number, the source URL)
+   - **Interpretation** (the operator take: what this means for my audience, what everyone gets wrong, the consequence at 12 months)
    - **Possible angles** (2-3, each one thesis)
    - **Candidate hooks** (2-3 one-liners, fact-first)
-   - **Raw material** — verbatims and exact figures ready to quote
+   - **Raw material** (verbatims and exact figures ready to quote)
 3. **Store.** `upsert_content_item` with item_type "brief", category "<topic-slug>", external_id "brief:<topic-slug>/<YYYY-MM-DD>" (idempotent: re-running the same day updates, not duplicates).
 4. **Report.** The TL;DR + the strongest angle.
 

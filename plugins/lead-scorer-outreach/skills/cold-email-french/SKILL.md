@@ -9,7 +9,7 @@ description: >-
 
 # Cold email en français
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated with Lead Scorer OAuth at the endpoint configured by the installed plugin). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 > **Context first.** Call `get_my_memory`, then `compile_context_pack` when a lead or campaign is in scope. Treat personal memory as user-owned context, not verified public CRM data. If my memory is empty, ask me the three questions you actually need answered, then continue.
 
@@ -17,7 +17,7 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint ht
 Écrire le premier email de la campagne <CAMPAIGN_ID> en français, pour des prospects francophones. Structure identique au skill "Cold email first touch", mais les règles de langue ci-dessous priment. Tu rédiges, je valide et j'active dans l'app.
 
 ## Steps
-1. `list_sender_accounts`, puis résous la campagne avec `list_campaigns` si son ID est inconnu avant `get_campaign_authoring_context` — lis le dossier de signaux de chaque lead. Pour l'email, arrête-toi si `signature_configured` est faux : demande-moi la signature exacte puis enregistre-la une fois avec `update_sender_account`, sans jamais inventer l'identité de l'expéditeur.
+1. `list_sender_accounts`, puis résous la campagne avec `list_campaigns` si son ID est inconnu avant `get_campaign_authoring_context` : lis le dossier de signaux de chaque lead. Pour l'email, arrête-toi si `signature_configured` est faux : demande-moi la signature exacte puis enregistre-la une fois avec `update_sender_account`, sans jamais inventer l'identité de l'expéditeur.
 2. Rédige lead par lead : **objet** (2-6 mots, casse française, sans point final) · **angle métier** (1-2 phrases sur un problème crédible de sa fonction) · **cas client concret** (3-5 phrases : contexte, solution construite, usage dans le travail et changement obtenu) · **lien avec son rôle** (1 phrase) · **demande** (1 question, faible friction).
 3. Pousse avec `write_campaign_drafts`, relis via `list_campaign_actions`, corrige avec `update_campaign_action_draft`.
 
@@ -41,7 +41,7 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint ht
 - Évite les listes de trois cas réduits à leurs intitulés. Développe un cas principal, puis cite brièvement les extensions seulement si elles renforcent la projection.
 
 ## Marqueurs de texte généré (les plus coûteux)
-- **Jamais de tiret cadratin ni demi-cadratin (— –) dans le message.** Le français ne les utilise pas : c'est le signal "écrit par une IA" le plus immédiat. Virgule, deux-points ou parenthèses.
+- **Jamais de tiret cadratin ni demi-cadratin dans le message.** Le français ne les utilise pas : c'est le signal "écrit par une IA" le plus immédiat. Virgule, deux-points ou parenthèses.
 - **Apostrophes typographiques (’)**, pas droites (').
 - **Aucun Markdown** : `**gras**`, `*italique*`, `#` arrivent en caractères bruts chez le destinataire.
 - **Aération obligatoire** : retour à la ligne après chaque phrase, ligne vide entre deux blocs d'idées. Jamais un pavé.

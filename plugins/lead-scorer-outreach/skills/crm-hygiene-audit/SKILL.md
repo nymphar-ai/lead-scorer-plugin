@@ -9,7 +9,7 @@ description: >-
 
 # CRM hygiene audit
 
-You have the "lead-scorer" MCP server connected (Lead Scorer CRM — endpoint https://mcp.lead-scorer.com/mcp, authenticated with Lead Scorer OAuth). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
+You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated with Lead Scorer OAuth at the endpoint configured by the installed plugin). Use its tools for CRM reads and writes. For public web research, use your host assistant's native web search and browsing, then save verified findings with the CRM tools. Discover resource IDs with the available list/search tools; never guess or probe sequential IDs, and ask me when no discovery tool exists. Never invent data: if a tool result is empty, say so. An API key is only a manual fallback for clients without OAuth support.
 
 ## Goal
 Keep the CRM trustworthy: every campaign and score is only as good as the data under it.
@@ -18,7 +18,7 @@ Keep the CRM trustworthy: every campaign and score is only as good as the data u
 1. **Sweep.** `get_lead_lists`, then sample each meaningful list with `get_leads_from_list`: count leads missing linkedin_url, email, enrichment, score.
 2. **Fix what a tool can fix.** Wrong headline, summary or LinkedIn identity → `update_lead`; malformed company LinkedIn identity → `update_company_linkedin`. Do not guess: verify, or leave and flag.
 3. **Score the backlog.** `get_leads_pending_scoring`; score each against my ICP with `submit_lead_score` + a 2-line explanation.
-4. **Tags.** `list_tags` — flag near-duplicate or inconsistent tags for my decision (do not mass-rename on your own).
+4. **Tags.** `list_tags`: flag near-duplicate or inconsistent tags for my decision (do not mass-rename on your own).
 5. **Report.** Defects found / fixed / needing me, per list, with a week-over-week comparison if a previous report exists.
 
 ## Hard rules

@@ -77,7 +77,7 @@ plugins/lead-scorer-outreach/
   .mcp.json                               Hosted MCP configuration
   assets/                                 Marketplace branding
   SUBMISSION.md                           Anthropic submission dossier
-  skills/                                 25 reviewed Lead Scorer Skills
+  skills/                                 28 reviewed Lead Scorer Skills
 ```
 
 ## Updating
@@ -152,6 +152,15 @@ claude plugin validate plugins/lead-scorer-outreach --strict
 claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
+## OpenAI directory release
+
+The public OpenAI directory uses a separate submission ZIP built from these same
+28 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
+[the OpenAI submission guide](submission/OPENAI.md). Its MCP endpoint is
+`https://mcp.lead-scorer.com/mcp/openai`; it uses existing account entitlements
+and excludes digital-service purchases. Git marketplace installation alone does
+not constitute publication in the OpenAI directory.
+
 ## Links
 
 - [MCP documentation](https://lead-scorer.com/mcp-server)
@@ -159,6 +168,8 @@ claude plugin validate .claude-plugin/marketplace.json --strict
 - [Privacy policy](https://lead-scorer.com/privacy)
 - [Terms of service](https://lead-scorer.com/terms)
 
+Audience budget/queue controls, bounded scans and connection degrees require their matching backend/MCP releases; the skill checks availability before use.
+
 ## Verified hiring research
 
-The three source-hiring-companies skills cover web/ATS, Free-Work and Collective. They discover workflow availability before calling it and retain a native-research fallback. Hiring-company workflows require the NYM-1530 backend and MCP release; do not assume a local draft is deployed.
+Hiring skills cover web/ATS, Free-Work and Collective. Confirm criteria/budget and CRM access first. Native research with CRM saves is supported; `source_hiring_companies` is app-only unless explicitly advertised for MCP execution. The NYM-1530 implementation must be reviewed before release.
