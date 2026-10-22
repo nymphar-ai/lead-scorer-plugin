@@ -3,7 +3,7 @@
     "name": "lead-scorer",
     "description": "Lead Scorer remote MCP and reviewed outreach skills for Claude Code",
     "owner": {
-        "name": "Lead Scorer",
+        "name": "Nymphar.AI",
         "email": "support@lead-scorer.com",
         "url": "https://lead-scorer.com"
     },
@@ -13,9 +13,9 @@
             "source": "./plugins/lead-scorer-outreach",
             "displayName": "Lead Scorer Outreach",
             "description": "Lead Scorer OAuth MCP, freelance talent sourcing, and reviewed outreach skills for Claude Code",
-            "version": "1.0.16",
+            "version": "1.0.17",
             "author": {
-                "name": "Lead Scorer",
+                "name": "Nymphar.AI",
                 "url": "https://lead-scorer.com"
             },
             "homepage": "https://lead-scorer.com/mcp-server",

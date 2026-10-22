@@ -2,10 +2,10 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "lead-scorer-outreach",
   "displayName": "Lead Scorer Outreach",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Lead Scorer OAuth MCP, freelance talent sourcing, and reviewed outreach skills for Claude Code",
   "author": {
-    "name": "Lead Scorer",
+    "name": "Nymphar.AI",
     "url": "https://lead-scorer.com"
   },
   "homepage": "https://lead-scorer.com/mcp-server",
