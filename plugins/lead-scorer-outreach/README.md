@@ -113,5 +113,5 @@ claude plugin validate plugins/lead-scorer-outreach --strict
 claude plugin validate .claude-plugin/marketplace.json --strict
 ```
 
-See `SUBMISSION.md` for the Anthropic community marketplace metadata and
-reviewer checklist.
+The Anthropic directory submission dossier lives in `submission/CLAUDE.md` at
+the repository root, outside the plugin bundle.
