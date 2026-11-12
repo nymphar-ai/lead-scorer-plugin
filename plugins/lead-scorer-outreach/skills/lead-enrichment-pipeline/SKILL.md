@@ -19,7 +19,7 @@ Enrichment is the only part of this chain that spends credits. Reads, scores and
 
 | Call | Cost |
 | --- | --- |
-| `enrich_leads` | ~1 credit per lead |
+| `enrich_leads` | 1 credit per first-time lead plus 1 per distinct eligible company; repeat leads already enriched by this customer are free unless explicitly refreshed |
 | `enrich_company` | 1 credit (0 when served from cache) |
 | `find_lead_contact_info` | 3 credits per email FOUND, 15 per phone found (nothing found, nothing charged) |
 
@@ -29,7 +29,8 @@ Both paid calls accept `dry_run: true`, which returns the estimate and your bala
 
 ## Steps
 1. **Inventory.** `get_leads_from_list`: count who has a LinkedIn URL, an email, an enriched profile.
-2. **Estimate, then enrich the pre-qualified only.** Call `enrich_leads` once with `dry_run: true` and the complete shortlist, then call it once for real with the same `lead_ids`. The backend persists one resumable run and processes it in restartable chunks of at most 10 leads; one tool call per lead creates a burst of competing runs and must never be used. Enrichment REQUIRES the lead to have a linkedin_url. Skip and report those without one. Use `enrich_company` for companies with a LinkedIn but no data.
+2. **Estimate, then enrich the pre-qualified only.** Call `enrich_leads` once with `dry_run: true` and the complete shortlist, then call it once for real with the same `lead_ids`. The backend persists one resumable run and processes it in restartable chunks of at most 10 leads; one tool call per lead creates a burst of competing runs and must never be used. A new lookup requires a resolvable LinkedIn identity. Skip and report leads that cannot be enriched. Use `enrich_company` for companies with a LinkedIn but no data.
+   Use `force_refresh: true` only when the user explicitly asks for a new enrichment; it is chargeable. Include the same flag in the dry run. The run's `credits_used` is the settled customer charge; `null` means it is not yet known.
 3. **Contact finding.** Hand this to the "Contact discovery" skill: it only runs on leads confirmed as ICP that you intend to contact. An email found for someone nobody will write to is 3 credits burned: a miss is free, a useless hit is not.
 4. **Company research.** Select the owned product/ICP, call `get_companies_pending_research` (optionally scoped to the company list), then read each official product site. Save a factual, source-backed site summary plus a separate analysis against that product and ICP with `submit_company_research`. Do not draft outreach in this step.
 5. **Lead AI layer.** `get_leads_pending_ai_enrichment`, then for each: write a 3-4 line summary and 2-3 actionable insights (angle to open with, risk, timing) from the enriched data, and store them with `submit_lead_ai_enrichment`.
