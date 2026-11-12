@@ -10,6 +10,9 @@
   },
   "homepage": "https://lead-scorer.com/mcp-server",
   "repository": "https://github.com/nymphar-ai/lead-scorer-plugin",
+  "privacyPolicyUrl": "https://lead-scorer.com/privacy",
+  "termsOfServiceUrl": "https://lead-scorer.com/terms",
+  "supportUrl": "https://github.com/nymphar-ai/lead-scorer-plugin/issues",
   "license": "UNLICENSED",
   "keywords": [
     "outreach",
