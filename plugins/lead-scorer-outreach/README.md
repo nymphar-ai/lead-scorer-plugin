@@ -72,9 +72,9 @@ codex plugin add lead-scorer-outreach@lead-scorer
 ```
 
 Approve `Lead Scorer Outreach`, authenticate in the browser, then start a new
-conversation so the host loads the MCP and all 27 Skills, including the
-source-backed freelance talent sourcing workflow and the daily LinkedIn
-and X engagement review.
+conversation so the host loads the MCP and all 30 Skills, including the
+source-backed freelance talent sourcing workflow, engagement watch setup on
+LinkedIn, X and Reddit, and the daily engagement review.
 
 ## Fallback without the plugin
 
