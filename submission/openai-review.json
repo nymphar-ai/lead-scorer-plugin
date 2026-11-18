@@ -55,7 +55,7 @@
     }
   },
   "publication": {
-    "release_notes": "Resubmission after the 20 October review: publisher identified as Nymphar.AI, the operator named in the public Terms and Privacy Policy; corrected explicit MCP safety annotations for writes, overwrites, provider calls and invitations. Includes the current 25 skills. Existing entitlements only; no digital-service commerce.",
+    "release_notes": "Resubmission after the 20 October review: publisher identified as Nymphar.AI, the operator named in the public Terms and Privacy Policy; corrected explicit MCP safety annotations for writes, overwrites, provider calls and invitations. Includes the current 27 skills, with two LinkedIn engagement playbooks that prepare comments for human review and publish nothing. Existing entitlements only; no digital-service commerce.",
     "translations": {
       "fr-FR": {
         "subtitle": "Prospection et brouillons",
