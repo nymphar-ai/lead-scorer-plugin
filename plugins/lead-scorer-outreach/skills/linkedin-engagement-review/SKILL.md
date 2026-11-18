@@ -6,7 +6,8 @@ description: >-
   others, so I can pick one and post it from Content › Engagement (on X, from X's
   prefilled reply box). Use for the morning, noon or evening engagement routine, "fais
   ma revue de posts", commenting LinkedIn posts, replying to X posts or tweets, social
-  selling, or turning posts into conversations without sounding like a bot.
+  selling, turning posts into conversations without sounding like a bot, or deciding
+  which engagement authors and subreddits to follow.
 ---
 
 # LinkedIn and X engagement review (three angles per post)
@@ -16,7 +17,7 @@ You have the "lead-scorer" MCP server connected (Lead Scorer CRM, authenticated 
 > **Context first.** Call `get_my_memory` and read its "Voix LinkedIn" section (how I write: tutoiement, length, words I use, words I never use). It is my voice on X too. If it is missing, build it once: read my own recent posts if I give you my profile URL (`fetch_profile_posts`), propose a short voice sheet, and save it with `update_my_memory` after I approve it.
 
 ## Goal
-Each waiting post gets a verdict. The ones worth a comment get three ready-to-post comments, each a different angle, that start from the post and bring up my offer only when it genuinely helps. I decide and post in the app; you never publish, react or dismiss anything.
+Each waiting post gets a verdict. The ones worth a comment get three ready-to-post comments, each a different angle, that start from the post and bring up my offer only when it genuinely helps. I decide and post in the app; you never publish, react or dismiss anything. You may suggest authors and subreddits for my watches to follow, but you follow one only after I say yes.
 
 ## Steps
 1. **Load the queue.** `list_pending_engagement_posts` (repeat it while `remaining_to_review` > 0). Each post has a `network`: `linkedin` or `x`. The result returns, per watch, the persona, the promise and the offer link, my instructions, and a `feedback` block: my recent dismissals with their reason, the edits I made to your angles, my last comments, and `results` (which watches, post types, links and modes bring reactions, replies, conversations and sign-ups). Read `feedback` before the posts: my edits and dismissals override your instincts. LinkedIn posts follow `writing_rules`, X posts follow `writing_rules_x`.
@@ -37,12 +38,16 @@ Each waiting post gets a verdict. The ones worth a comment get three ready-to-po
    - a shorter, more direct tone, still in the voice of "Voix LinkedIn": one idea, no preamble;
    - `like` is the only reaction (`suggested_reaction: "like"`), `suggest_capture` stays false (X replies give no usable leads), and there is no invitation.
    I always post the reply myself: the card opens X with your text prefilled, because X refuses replies sent by an application.
-6. **Save in batches.** `submit_engagement_reviews` with up to 50 reviews per call: `verdict`, `review_reason` (one or two sentences I will read on the card), `post_type`, `priority`, the three scores, `suggested_reaction`, `suggest_capture` (LinkedIn only: true when the post's commenters are themselves the persona, e.g. other freelancers answering "same here"), and the `angles`. Read the returned `lint_warnings` and rewrite any angle that "sounds like AI" or runs too long before moving on.
+6. **Save in batches.** `submit_engagement_reviews` with up to 50 reviews per call: `verdict`, `review_reason` (one or two sentences I will read on the card), `post_type`, `priority`, the three scores, `suggested_reaction`, `suggest_capture` (LinkedIn only: true when the post's commenters are themselves the persona, e.g. other freelancers answering "same here"), and the `angles`. Read the returned `lint_warnings` and rewrite any angle that "sounds like AI" or runs too long before moving on. Each `ready` author also joins my CRM list for that network ("Engagement · LinkedIn", "Engagement · X" or "Engagement · Reddit"): `authors_listed` counts the new entries. You have nothing to add to a list yourself.
 7. **Invitations (LinkedIn only).** `get_engagement_results` lists my comments; for each one whose `invite_status` is `suggested` (the author answered my comment), draft a connection note of at most 300 characters that refers to the exchange, and save it with `save_engagement_invite_note`. I send it myself. On X, an author's reply is only recorded.
-8. **Report.** How many posts reviewed, kept and skipped per network (with the top skip reasons), the three best cards to open first, and what `results` suggests changing (a watch that never converts, links that hurt replies, a network that brings nothing).
+8. **Suggest follows.** Never follow without my explicit yes: each followed account or subreddit costs reads on every run.
+   - **Authors (LinkedIn and X).** Among the posts you kept, pick the authors who are clearly the persona and worth reading every day (strong `author_fit` and `topic_fit`, or a second good post from them). Propose at most three, and only those whose `crm.author_follow` is `available`. After I agree, call `follow_engagement_author` with the `post_id`. When it is `full`, the watch already follows its maximum (30 accounts on LinkedIn, 60 on X): ask me which creator to drop, update the watch with `upsert_engagement_watch`, then follow.
+   - **Subreddits (Reddit watches).** A Reddit card has no author to follow (`author_follow` is null), because Reddit cannot read a user's posts. Instead, `list_engagement_watches` gives each Reddit watch `subreddit_suggestions`: subreddits that gave it at least two retained posts and that it does not follow yet. Propose them. After I agree, call `follow_engagement_subreddit` with the `watch_id` and the subreddit. A watch follows at most 10 subreddits: when it is full, ask me which one to drop first.
+9. **Report.** How many posts reviewed, kept and skipped per network (with the top skip reasons), the three best cards to open first, what `results` suggests changing (a watch that never converts, links that hurt replies, a network that brings nothing), how many authors entered my Engagement lists, and the follows you suggest, each with a one-line reason.
 
 ## Hard rules
 - Never publish, like, dismiss or send anything: the user decides in Content › Engagement, and on X posts the reply from X.
+- Never follow an author or a subreddit without the user's explicit yes for that author or subreddit.
 - Never pretend to be a customer, invent a result, or claim we already spoke.
 - No comment that would read the same under another post: if it fits anywhere, rewrite it.
 - If my voice sheet and my recent edits disagree, follow the edits.
