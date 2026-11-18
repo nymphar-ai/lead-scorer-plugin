@@ -6,7 +6,7 @@ The official public plugin for connecting Codex, ChatGPT and Claude Code to
 One installation provides:
 
 - the hosted OAuth MCP at `https://mcp.lead-scorer.com/mcp`;
-- 27 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
+- 30 reviewed Skills for sourcing, scoring, enrichment, outreach and content;
 - source-backed company website summaries and product/ICP-specific AI analysis;
 - agent-native account onboarding, Pro subscription and credit top-ups;
 - secure hosted email and LinkedIn connection flows;
@@ -76,7 +76,7 @@ plugins/lead-scorer-outreach/
   .claude-plugin/plugin.json              Claude manifest
   .mcp.json                               Hosted MCP configuration
   assets/                                 Marketplace branding
-  skills/                                 27 reviewed Lead Scorer Skills
+  skills/                                 30 reviewed Lead Scorer Skills
 ```
 
 ## Updating
@@ -154,7 +154,7 @@ claude plugin validate .claude-plugin/marketplace.json --strict
 ## OpenAI directory release
 
 The public OpenAI directory uses a separate submission ZIP built from these same
-27 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
+30 skills and assets. Run `python3 scripts/build_openai_submission.py` and follow
 [the OpenAI submission guide](submission/OPENAI.md). Its MCP endpoint is
 `https://mcp.lead-scorer.com/mcp/openai`; it uses existing account entitlements
 and excludes digital-service purchases. Git marketplace installation alone does
