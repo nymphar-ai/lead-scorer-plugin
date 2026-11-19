@@ -3,7 +3,8 @@ name: signal-audiences
 description: >-
   Capture, deduplicate and qualify LinkedIn audiences in Lead Scorer. Use for post/profile
   engagers (reactions, likes, comments), people searches, event participants, capture budgets/queues,
-  connection-degree routing, or a prospect's saved event registrations.
+  connection-degree routing, a prospect's saved event registrations, or people engaging with a
+  competitor's company page and leaders ("do you use X?" campaigns).
 ---
 
 # LinkedIn signal audiences
@@ -53,6 +54,23 @@ These Unipile reads use the LinkedIn capture allowance without extra Lead Scorer
 
 ## Campaign preflight
 Preflight may warn about leads already connected to the sender. Review follow-up copy before activation. Redundant invitations are skipped; the configured follow-up delay starts at bypass. New acceptances retain acceptance-based timing. Never claim skipped invitations were sent or activate without human review and approval.
+
+## Competitor audiences
+Find people engaging with a competitor's public LinkedIn activity, then offer the user's product as the alternative.
+
+1. Ask for the competitors' company page URLs (`linkedin.com/company/<slug>/`) and, optionally, up to 5 founders/leaders per competitor (`linkedin.com/in/…`). Check `list_products` and `list_audience_sources`; reuse matching sources.
+2. Create one source per competitor: `create_audience_source` with the page URL, `kind: "competitor_engagers"`, optional `competitor_name` (defaults to the slug, e.g. `la-growth-machine` → "La Growth Machine"; it is the name messages may cite) and `competitor_people`. Enable `prequalification_enabled` with the right `product_id`.
+3. Capture covers reactions and comments on the page's company-authored posts from the last 30 days and on the listed leaders' own posts; reposts are excluded. It reads through Lead Scorer's data provider, never the user's LinkedIn account. The competitor's own staff is excluded. Cost: 1 credit per 10 new leads.
+4. Poll `list_audience_sources` until the capture finishes. The source then stays `scheduled` and re-syncs weekly, re-reading only posts whose engagement changed. `update_audience_source` changes `competitor_name` or replaces `competitor_people`.
+5. Review kept profiles with `get_leads_from_list` (`competitor` filter where available) and `get_lead`. Each captured person carries a private competitor signal visible only to this user, used by scoring and drafting: `competitor_signals` items hold `competitor`, `interaction`, `occurrences`, `post_url`, `post_author`, `first_seen_at`, `last_seen_at`.
+6. Draft outreach:
+   - `create_competitor_campaign` (free): `source_id`; `product_id` (defaults to the source's product, required if it has none); `channels` (`["linkedin","email"]` by default, or one); `language` (`fr` default, or `en`); optional `name`, `linkedin_account_id`, `email_account_id`. It creates a DRAFT campaign with the leads of the source's list carrying the competitor signal, minus profiles prequalification discarded, using the standard SDR tree and copy asking whether they use the competitor and offering the product as the natural alternative with a free audit. Nothing is sent; the user reviews and activates it in the app.
+   - Or write per-lead drafts: `get_campaign_authoring_context` (returns `competitor_signals` per lead), then `write_campaign_drafts`.
+
+Rules:
+- LinkedIn shows a page's followers only to its admins. These people engage with the competitor; never call them followers or customers.
+- Messages may name the competitor and ask whether they use it. Never mention the post, the reaction, like or comment, or how the person was found.
+- Never suggest impersonating a competitor employee, adding a fake job title, or Sales Navigator's "followers of your company" workaround to reach a page's followers.
 
 ## Event registrations
 - Capture an event's LinkedIn participants URL with one `eventAttending` filter, including others' events. Reuse existing sources; normal import credits and LinkedIn read budgets apply.
